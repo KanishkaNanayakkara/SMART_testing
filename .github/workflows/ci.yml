@@ -1,76 +1,76 @@
-name: Library Application CI
+name: Run Tests
+
 on:
   push:
     branches:
       - main
-pull_request:
-  paths: 
-    - 'src/test/**'
-    - 'libs'
-    - '.github/workflows/**'
+  pull_request:
+    branches:
+      - main
+
 jobs:
-test:
-runs-on: self-hosted
+  run-tests:
+    runs-on: ubuntu-latest
 
-steps:
-- uses: actions/checkout@v3
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-- name: Set up JDK 17
-  uses: actions/setup-java@v3
-  with:
-    java-version: '17'
-    distribution: 'temurin'
-    cache: maven
+      # Set up Java environment
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Use Eclipse Temurin (AdoptOpenJDK)
+          java-version: '17'      # Ensure compatibility with your project's SDK
 
-- name: Install Chrome
-  run: |
-    sudo apt-get update
-    sudo apt-get install -y google-chrome-stable
+      # Start the backend service using Java SDK
+      - name: Start Backend Service
+        run: |
+          nohup java -jar libs/demo-0.0.1-SNAPSHOT.jar &
 
-- name: Copy External JAR
-  run: |
-    mkdir -p target
-    cp libs/demo-0.0.1-SNAPSHOT.jar target/
+      # Wait for the backend service to start
+      - name: Wait for backend
+        run: |
+          for i in {1..10}; do
+            nc -zv localhost 7081 && echo "Backend is up!" && break
+            echo "Waiting for backend..."
+            sleep 5
+          done
 
-- name: Build Project
-  run: mvn clean package -DskipTests
+      # Run API Tests
+      - name: Run API Tests
+        run: |
+          mvn -Dtest="com.selenium.testing.apiTesting.tests.registerBookApiTest.*" test
 
-- name: Start Backend Service
-  run: |
-    # Start the backend jar in the background
-    # Ensure the jar matches exactly the name you provided
-    java -jar target/demo-0.0.1-SNAPSHOT.jar &
-    
-    # Wait for the service to start
-    # You might need to adjust the sleep time based on your application's startup time
-    sleep 30
+  ui-tests:
+    runs-on: ubuntu-latest
+    needs: run-tests
 
-- name: Run API Tests
-  run: mvn test -Dtest=com.selenium.testing.apiTesting.tests.registerBookApiTest.*
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-- name: Run UI Tests
-  run: mvn test -Dtest=com.selenium.testing.uiTesting.*
+      # Set up Java environment
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-- name: Generate Allure Report
-  uses: simple-elf/allure-report-action@v1.7
-  if: always()
-  with:
-    allure_results: target/allure-results
-    allure_report: target/allure-report
-    allure_history: allure-history
+      # Install Chrome and WebDriver for UI tests
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
-- name: Deploy Allure Report to GitHub Pages
-  uses: peaceiris/actions-gh-pages@v3
-  if: always()
-  with:
-    github_token: ${{ secrets.GITHUB_TOKEN }}
-    publish_dir: allure-history
+      - name: Install Chrome WebDriver
+        run: |
+          wget -N https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip -d /usr/local/bin
 
-- name: Upload Test Results
-  uses: actions/upload-artifact@v3
-  if: always()
-  with:
-    name: test-results
-    path: |
-      target/surefire-reports
-      target/allure-results
+      # Run UI Tests
+      # - name: Run UI Tests
+      #   run: |
+      #     mvn -Dtest="com.selenium.testing.uiTesting.*" test
