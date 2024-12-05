@@ -99,12 +99,16 @@ qa-testing/
 
 ---
 
-## License  
-This project is developed for educational purposes.  
+## Branch Naming Convension  
+1. Feature - ft , Chore- ch or Bug- bg
+/
+2. Initials of dev
+-
+3. branch name
+ex:ch/kn-add-read-me-file
+   ft/ws-login-ui-test
+   bg/kn-fix-login-test-failure 
 
-## Contact  
-For questions or issues, contact the project contributors or your instructor.  
 
---- 
 
 This README provides a clear guide to set up, understand, and run the project effectively.
