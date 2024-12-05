@@ -1,0 +1,72 @@
+name: Library Application CI
+on:
+push:
+branches: [ main, master ]
+pull_request:
+branches: [ main, master ]
+jobs:
+test:
+runs-on: ubuntu-latest
+
+steps:
+- uses: actions/checkout@v3
+
+- name: Set up JDK 17
+  uses: actions/setup-java@v3
+  with:
+    java-version: '17'
+    distribution: 'temurin'
+    cache: maven
+
+- name: Install Chrome
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y google-chrome-stable
+
+- name: Copy External JAR
+  run: |
+    mkdir -p target
+    cp libs/demo-0.0.1-SNAPSHOT.jar target/
+
+- name: Build Project
+  run: mvn clean package -DskipTests
+
+- name: Start Backend Service
+  run: |
+    # Start the backend jar in the background
+    # Ensure the jar matches exactly the name you provided
+    java -jar target/demo-0.0.1-SNAPSHOT.jar &
+    
+    # Wait for the service to start
+    # You might need to adjust the sleep time based on your application's startup time
+    sleep 30
+
+- name: Run API Tests
+  run: mvn test -Dtest=com.selenium.testing.apiTesting.tests.registerBookApiTest.*
+
+- name: Run UI Tests
+  run: mvn test -Dtest=com.selenium.testing.uiTesting.*
+
+- name: Generate Allure Report
+  uses: simple-elf/allure-report-action@v1.7
+  if: always()
+  with:
+    allure_results: target/allure-results
+    allure_report: target/allure-report
+    allure_history: allure-history
+
+- name: Deploy Allure Report to GitHub Pages
+  uses: peaceiris/actions-gh-pages@v3
+  if: always()
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: allure-history
+
+- name: Upload Test Results
+  uses: actions/upload-artifact@v3
+  if: always()
+  with:
+    name: test-results
+    path: |
+      target/surefire-reports
+      target/allure-results
