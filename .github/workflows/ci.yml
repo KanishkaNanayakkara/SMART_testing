@@ -1,9 +1,13 @@
 name: Library Application CI
 on:
 push:
-branches: [ main, master ]
+branches:
+  - main
 pull_request:
-branches: [ main, master ]
+paths: 
+  - 'src/test/**'
+  - 'libs'
+  - '.github/workflows/**'
 jobs:
 test:
 runs-on: ubuntu-latest
