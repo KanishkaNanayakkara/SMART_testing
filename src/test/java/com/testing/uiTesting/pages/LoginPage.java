@@ -1,4 +1,4 @@
-package com.selenium.testing.uiTesting.pages;
+package com.testing.uiTesting.pages;
 
 import java.time.Duration;
 

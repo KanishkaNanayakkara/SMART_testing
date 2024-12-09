@@ -1,4 +1,4 @@
-package com.selenium.testing.apiTesting.tests;
+package com.testing.apiTesting.base;
 
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
