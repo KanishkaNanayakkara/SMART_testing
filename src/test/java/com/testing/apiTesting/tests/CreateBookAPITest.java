@@ -10,7 +10,7 @@ import com.testing.apiTesting.pages.BookAPIPage;
 import com.testing.apiTesting.utils.APIResponseValidator;
 import com.testing.apiTesting.utils.BookDataFactory;
 
-public class BookAPITest extends BaseApiTest {
+public class CreateBookAPITest extends BaseApiTest {
 
     private BookAPIPage bookPage;
 
