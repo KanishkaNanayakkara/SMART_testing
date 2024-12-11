@@ -1,14 +1,14 @@
-package com.testing.apiTesting.pages;
+package com.testing.apiTesting.apiClients;
 
 import io.restassured.response.Response;
 import java.util.Map;
 
 import com.testing.apiTesting.base.BaseApiTest;
 
-public class BookAPIPage {
+public class BookAPIClient {
     private BaseApiTest baseTest;
 
-    public BookAPIPage(BaseApiTest baseTest) {
+    public BookAPIClient(BaseApiTest baseTest) {
         this.baseTest = baseTest;
     }
 

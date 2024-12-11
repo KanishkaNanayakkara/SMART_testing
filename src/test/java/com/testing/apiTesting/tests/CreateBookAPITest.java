@@ -5,18 +5,18 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Map;
 
+import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseApiTest;
-import com.testing.apiTesting.pages.BookAPIPage;
 import com.testing.apiTesting.utils.APIResponseValidator;
 import com.testing.apiTesting.utils.BookDataFactory;
 
 public class CreateBookAPITest extends BaseApiTest {
 
-    private BookAPIPage bookPage;
+    private BookAPIClient bookPage;
 
     @BeforeMethod
     public void setUp() {
-        bookPage = new BookAPIPage(this);
+        bookPage = new BookAPIClient(this);
     }
 
     @Test(description = "Verify creating a book with valid data")
