@@ -3,3 +3,6 @@ target/
 
 # Ignore VS Code settings
 .vscode/
+
+# Ignore Allure-result
+allure-results/
