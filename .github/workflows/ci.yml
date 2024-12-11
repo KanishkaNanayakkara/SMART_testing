@@ -41,7 +41,7 @@ jobs:
       # Run API Tests
       - name: Run API Tests
         run: |
-          mvn test -Dtest="com.testing.apiTesting.*"
+          mvn test -Dtest="com.testing.apiTesting.**.*"
 
   ui-tests:
     runs-on: ubuntu-latest
