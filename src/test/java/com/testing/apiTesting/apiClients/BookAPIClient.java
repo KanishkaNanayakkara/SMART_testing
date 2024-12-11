@@ -3,12 +3,12 @@ package com.testing.apiTesting.apiClients;
 import io.restassured.response.Response;
 import java.util.Map;
 
-import com.testing.apiTesting.base.BaseApiTest;
+import com.testing.apiTesting.base.BaseAPITest;
 
 public class BookAPIClient {
-    private BaseApiTest baseTest;
+    private BaseAPITest baseTest;
 
-    public BookAPIClient(BaseApiTest baseTest) {
+    public BookAPIClient(BaseAPITest baseTest) {
         this.baseTest = baseTest;
     }
 

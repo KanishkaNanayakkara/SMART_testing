@@ -6,11 +6,11 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 import com.testing.apiTesting.apiClients.BookAPIClient;
-import com.testing.apiTesting.base.BaseApiTest;
+import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
 import com.testing.apiTesting.utils.BookDataFactory;
 
-public class CreateBookAPITest extends BaseApiTest {
+public class CreateBookAPITest extends BaseAPITest {
 
     private BookAPIClient bookPage;
 
