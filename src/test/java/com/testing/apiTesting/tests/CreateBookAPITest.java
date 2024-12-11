@@ -1,22 +1,22 @@
-package com.selenium.testing.apiTesting.tests.registerBookApiTest;
+package com.testing.apiTesting.tests;
 
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Map;
 
-import com.selenium.testing.apiTesting.tests.BaseApiTest;
-import com.selenium.testing.apiTesting.tests.bookDataFactory.BookDataFactory;
-import com.selenium.testing.apiTesting.tests.pages.BookPage;
-import com.selenium.testing.apiTesting.tests.utils.APIResponseValidator;
+import com.testing.apiTesting.apiClients.BookAPIClient;
+import com.testing.apiTesting.base.BaseAPITest;
+import com.testing.apiTesting.utils.APIResponseValidator;
+import com.testing.apiTesting.utils.BookDataFactory;
 
-public class BookAPITest extends BaseApiTest {
+public class CreateBookAPITest extends BaseAPITest {
 
-    private BookPage bookPage;
+    private BookAPIClient bookPage;
 
     @BeforeMethod
     public void setUp() {
-        bookPage = new BookPage(this);
+        bookPage = new BookAPIClient(this);
     }
 
     @Test(description = "Verify creating a book with valid data")

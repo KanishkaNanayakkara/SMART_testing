@@ -1,10 +1,10 @@
-package com.selenium.testing.uiTesting.tests;
+package com.testing.uiTesting.tests;
 
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
-import com.selenium.testing.uiTesting.BaseUITest;
-import com.selenium.testing.uiTesting.pages.LoginPage;
+import com.testing.uiTesting.base.BaseUITest;
+import com.testing.uiTesting.pages.LoginPage;
 
 public class LoginTest extends BaseUITest {
 

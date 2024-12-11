@@ -1,4 +1,4 @@
-package com.selenium.testing.apiTesting.tests.utils;
+package com.testing.apiTesting.utils;
 
 import org.testng.Assert;
 

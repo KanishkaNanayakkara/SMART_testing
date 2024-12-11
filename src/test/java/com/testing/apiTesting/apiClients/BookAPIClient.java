@@ -1,14 +1,14 @@
-package com.selenium.testing.apiTesting.tests.pages;
+package com.testing.apiTesting.apiClients;
 
 import io.restassured.response.Response;
 import java.util.Map;
 
-import com.selenium.testing.apiTesting.tests.BaseApiTest;
+import com.testing.apiTesting.base.BaseAPITest;
 
-public class BookPage {
-    private BaseApiTest baseTest;
+public class BookAPIClient {
+    private BaseAPITest baseTest;
 
-    public BookPage(BaseApiTest baseTest) {
+    public BookAPIClient(BaseAPITest baseTest) {
         this.baseTest = baseTest;
     }
 

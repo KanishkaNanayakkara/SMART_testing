@@ -1,4 +1,4 @@
-package com.selenium.testing.apiTesting.tests.bookDataFactory;
+package com.testing.apiTesting.utils;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,10 +1,10 @@
-package com.selenium.testing.apiTesting.tests;
+package com.testing.apiTesting.base;
 
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeSuite;
 
-public class BaseApiTest {
+public class BaseAPITest {
 
     public RequestSpecification authAs(String username) {
         return RestAssured.given()
