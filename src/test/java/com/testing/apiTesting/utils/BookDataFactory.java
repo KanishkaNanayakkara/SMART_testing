@@ -22,4 +22,9 @@ public class BookDataFactory {
         bookData.put("title", "Test Book");
         return bookData;
     }
+
+    public static Map<String, Object> creteInvalidBook() {
+        Map<String, Object> bookData = new HashMap<>();
+        return bookData;
+    }
 }
