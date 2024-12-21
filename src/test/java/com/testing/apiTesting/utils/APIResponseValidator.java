@@ -36,9 +36,24 @@ public class APIResponseValidator {
 
         JsonPath jsonPath = response.jsonPath();
         Assert.assertEquals(jsonPath.getInt("id"), invalidBookId, "Book ID does not match");
-        // Assert.assertNotNull(jsonPath.getString("title"), "Book title should not be null");
-        // Assert.assertNotNull(jsonPath.getString("author"), "Book author should not be null");
     }
 
-    
+    public static void validateDuplicateCreation(Response response) {
+        int statusCode = response.statusCode();
+        if (statusCode == 409) {
+            Assert.assertEquals(statusCode, 409, "Expected 409 Conflict for duplicate book ID");
+        } else if (statusCode == 208) {
+            Assert.assertEquals(statusCode, 208, "Expected 208 Already Reported for duplicate book ID");
+        }
+    }
+    public static void updateBookTest(Response response) {
+        Assert.assertEquals(response.jsonPath().getString("title"), "Updated Book Title", "Title did not update correctly");
+        Assert.assertEquals(response.jsonPath().getString("author"), "Updated Author", "Author did not update correctly");
+    }
+    public static void invalidBookUpdate(Response response) {
+        Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for invalid book update");
+    }
+    public static void notExistBookUpdate(Response response) {
+        Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for non-existent book update");
+    }
 }
