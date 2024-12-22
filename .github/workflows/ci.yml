@@ -43,9 +43,8 @@ jobs:
         run: |
           mvn test -Dtest="*APITests"
 
-  ui-tests:
+  run-ui-tests:
     runs-on: ubuntu-latest
-    needs: run-tests
 
     steps:
       # Checkout the code
