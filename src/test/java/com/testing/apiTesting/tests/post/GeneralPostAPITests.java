@@ -15,6 +15,11 @@ import java.util.Map;
 public class GeneralPostAPITests extends BaseAPITest {
 
     private BookAPIClient bookAPIClient;
+
+    String title = "";
+    String author = "";
+    String adminUser = "admin";
+    String generalUser = "user";
     
     @BeforeMethod
     public void setUp(){
@@ -23,29 +28,35 @@ public class GeneralPostAPITests extends BaseAPITest {
 
     @Test(description = "Verify creating a book with valid data")
     public void testCreateBookSuccessfully(){
-        Map<String, Object> bookData = BookDataFactory.createValidBook();
-        Response response = bookAPIClient.createBook("admin", bookData);
+        title = "Test Book 1";
+        author = "Test author 1";
+        Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
+        Response response = bookAPIClient.createBook(adminUser, bookData);
         APIResponseValidator.validateSuccessfulCreation(response);
     }
 
     @Test(description = "Verify book creation fails when the title is missing")
     public void testCreateBookWithMissingTitle(){
-        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingTitle();  // Use the method to get book with missing title
-        Response response = bookAPIClient.createBook("admin", invalidBookData);
+        author = "Test author 2";
+        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingTitle(author);
+        Response response = bookAPIClient.createBook(adminUser, invalidBookData);
         APIResponseValidator.validateBadRequest(response);
     }
 
     @Test(description = "Verify book creation fails when the author is missing")
     public void testCreateBookWithMissingAuthor(){
-        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingAuthor();  // Use the method to get book with missing author
-        Response response = bookAPIClient.createBook("admin", invalidBookData);
+        title = "Test Book 2";
+        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingAuthor(title);
+        Response response = bookAPIClient.createBook(adminUser, invalidBookData);
         APIResponseValidator.validateBadRequest(response);
     }
 
     @Test(description = "Verify unauthorized access error for non-admin user")
     public void testUnauthorizedAccess(){
-        Map<String, Object> bookData = BookDataFactory.createValidBook();
-        Response response = bookAPIClient.createBook("user", bookData);
+        title = "Test Book 3";
+        author = "Test author 3";
+        Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
+        Response response = bookAPIClient.createBook(generalUser, bookData);
         APIResponseValidator.validateUnauthorizedAccess(response);
     }
 }
