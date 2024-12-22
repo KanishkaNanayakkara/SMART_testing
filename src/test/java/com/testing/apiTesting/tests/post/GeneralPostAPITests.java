@@ -1,4 +1,4 @@
-package com.testing.apiTesting.tests.POST;
+package com.testing.apiTesting.tests.post;
 
 import io.restassured.response.Response;
 
