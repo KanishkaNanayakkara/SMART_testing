@@ -71,6 +71,6 @@ jobs:
           unzip chromedriver_linux64.zip -d /usr/local/bin
 
       # Run UI Tests
-      # - name: Run UI Tests
-      #   run: |
-      #     mvn -Dtest="com.selenium.testing.uiTesting.*" test
+      - name: Run UI Tests
+        run: |
+          mvn -Dtest="com.testing.uiTesting.*" test

@@ -1,52 +1,37 @@
 package com.testing.uiTesting.pages;
 
-import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
 
     private WebDriver driver;
-    private WebDriverWait wait;
 
-    @FindBy(id = "username")
-    private WebElement usernameField;
+    @FindBy(xpath = "//input[@placeholder='Username']")
+    private WebElement txt_username;
 
-    @FindBy(id = "password")
-    private WebElement passwordField;
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement txt_password;
 
-    @FindBy(id = "login-button")
-    private WebElement loginButton;
-
-    @FindBy(id = "error-message")
-    private WebElement errorMessage;
+    @FindBy(xpath = "//button[normalize-space()='Login']")
+    private WebElement btn_login;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
-    public void login(String username, String password) {
-        wait.until(ExpectedConditions.elementToBeClickable(usernameField)).sendKeys(username);
-        passwordField.sendKeys(password);
-        loginButton.click();
+    public void setUserName(String user) {
+        txt_username.sendKeys(user);
     }
 
-    public boolean isErrorDisplayed() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(errorMessage)).isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+    public void setPassword(String password) {
+        txt_password.sendKeys(password);
     }
 
-    public String getErrorMessage() {
-        return errorMessage.getText();
+    public void clickLogin( ) {
+        btn_login.click();
     }
 }

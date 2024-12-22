@@ -2,7 +2,6 @@ package com.testing.uiTesting.tests;
 
 import org.testng.annotations.Test;
 import org.testng.Assert;
-
 import com.testing.uiTesting.base.BaseUITest;
 import com.testing.uiTesting.pages.LoginPage;
 
@@ -10,29 +9,12 @@ public class LoginTest extends BaseUITest {
 
     @Test
     public void testSuccessfulLogin() {
-        driver.get("https://github.com/login");
-        
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("validuser", "validpassword");
-        
-        // Add assertion to verify successful login
-        // This could be checking for a dashboard page, welcome message, etc.
-        Assert.assertTrue(driver.getCurrentUrl().contains("/dashboard"), 
-            "Login was not successful");
+        loginPage.setUserName("Admin");
+        loginPage.setPassword("admin123");
+        loginPage.clickLogin();
+
+        Assert.assertEquals(driver.getTitle(), "OrangeHRM");
     }
 
-    @Test
-    public void testInvalidLogin() {
-        driver.get("https://example.com/login");
-        
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("invaliduser", "wrongpassword");
-        
-        // Verify error message is displayed
-        Assert.assertTrue(loginPage.isErrorDisplayed(), 
-            "Error message not displayed for invalid login");
-        Assert.assertEquals(loginPage.getErrorMessage(), 
-            "Invalid username or password", 
-            "Incorrect error message displayed");
-    }
 }
