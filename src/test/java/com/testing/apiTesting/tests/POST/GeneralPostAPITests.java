@@ -29,15 +29,15 @@ public class GeneralPostAPITests extends BaseAPITest {
     }
 
     @Test(description = "Verify book creation fails when the title is missing")
-    public void testCreateBookWithMissingTitle (){
-        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingTitle();
+    public void testCreateBookWithMissingTitle(){
+        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingTitle();  // Use the method to get book with missing title
         Response response = bookAPIClient.createBook("admin", invalidBookData);
         APIResponseValidator.validateBadRequest(response);
     }
 
-    @Test(description = "verify book creation fails when the author is missing")
+    @Test(description = "Verify book creation fails when the author is missing")
     public void testCreateBookWithMissingAuthor(){
-        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingAuthor();
+        Map<String, Object> invalidBookData = BookDataFactory.createBookWithMissingAuthor();  // Use the method to get book with missing author
         Response response = bookAPIClient.createBook("admin", invalidBookData);
         APIResponseValidator.validateBadRequest(response);
     }
