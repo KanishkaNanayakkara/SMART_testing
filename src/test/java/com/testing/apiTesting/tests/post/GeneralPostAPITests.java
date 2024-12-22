@@ -26,15 +26,6 @@ public class GeneralPostAPITests extends BaseAPITest {
         bookAPIClient = new BookAPIClient(this);
     }
 
-    @Test(description = "Verify creating a book with null data")
-    public void testCreateBook_WithNullData(){
-        title = null;
-        author = null;
-        Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
-        Response response = bookAPIClient.createBook(adminUser, bookData);
-        APIResponseValidator.validateBadRequest(response);
-    }
-
     @Test(description = "Verify creating a book with valid data")
     public void testCreateBookSuccessfully(){
         title = "Test Book 1";
@@ -67,6 +58,15 @@ public class GeneralPostAPITests extends BaseAPITest {
         Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
         Response response = bookAPIClient.createBook(generalUser, bookData);
         APIResponseValidator.validateUnauthorizedAccess(response);
+    }
+
+    @Test(description = "Verify creating a book with null data")
+    public void testCreateBook_WithNullData(){
+        title = null;
+        author = null;
+        Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
+        Response response = bookAPIClient.createBook(adminUser, bookData);
+        APIResponseValidator.validateBadRequest(response);
     }
 
     @Test(description = "Verify creating a book with empty strings for title and author")
