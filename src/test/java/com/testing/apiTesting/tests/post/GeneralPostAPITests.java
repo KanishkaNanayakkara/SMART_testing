@@ -64,7 +64,7 @@ public class GeneralPostAPITests extends BaseAPITest {
     public void testCreateBook_WithNullData(){
         title = null;
         author = null;
-        Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
+        Map<String, Object> bookData = BookDataFactory.createValidBook(null, null);
         Response response = bookAPIClient.createBook(adminUser, bookData);
         APIResponseValidator.validateBadRequest(response);
     }
