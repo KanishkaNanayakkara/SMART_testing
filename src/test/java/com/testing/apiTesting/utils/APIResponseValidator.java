@@ -60,8 +60,7 @@ public class APIResponseValidator {
 
         JsonPath jsonPath = response.jsonPath();
         Assert.assertEquals(jsonPath.getInt("id"), invalidBookId, "Book ID does not match");
-        // Assert.assertNotNull(jsonPath.getString("title"), "Book title should not be null");
-        // Assert.assertNotNull(jsonPath.getString("author"), "Book author should not be null");
+
     }
 
     

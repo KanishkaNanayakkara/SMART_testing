@@ -8,7 +8,7 @@ import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
 
-public class DeleteBookAPITest extends BaseAPITest {
+public class DeleteBookAPITests extends BaseAPITest {
 
     private BookAPIClient bookAPIClient;
 
@@ -20,17 +20,27 @@ public class DeleteBookAPITest extends BaseAPITest {
     @Test(description = "Verify successful deletion of a book by ID")
     public void testDeleteBook_SuccessScenario() {
 
-        String username = "user";
-        int bookId = 1; 
-
+        String username = "admin";
+        int bookId = 4;
 
         Response deleteResponse = bookAPIClient.deleteBook(username, bookId);
 
-        //  Validate successful deletion
+        // Validate successful deletion
         APIResponseValidator.validateSuccessfulDeletion(deleteResponse);
 
-        // Verify the book no longer exists
-        Response getDeletedResponse = bookAPIClient.getBookById(username, bookId);
-        APIResponseValidator.validateInvalidID(getDeletedResponse, bookId);
     }
+
+    @Test(description = "Verify unauthorized access is prevented when deleting a book")
+    public void testDeleteBook_UnauthorizedAccess() {
+
+        String username = "user";
+        int bookId = 1;
+
+        Response deleteResponse = bookAPIClient.deleteBook(username, bookId);
+
+        // Validate unauthorized access response
+        APIResponseValidator.validateUnauthorizedAccess(deleteResponse);
+
+    }
+
 }

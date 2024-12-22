@@ -7,7 +7,7 @@ import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
 
-public class InvalidBookIDTest extends BaseAPITest {
+public class InvalidBookIDTests extends BaseAPITest {
 
 
     private BookAPIClient bookAPIClient;
@@ -19,7 +19,7 @@ public class InvalidBookIDTest extends BaseAPITest {
 
     @Test(description = "Verify getting a book by ID with invalid response")
     public void testGetBookById_ValidScenario() {
-        int invalidBookId = 1; 
+        int invalidBookId = 5; 
         Response response = bookAPIClient.getBookById("admin", invalidBookId);
         APIResponseValidator.validateInvalidID(response, invalidBookId); 
     }
