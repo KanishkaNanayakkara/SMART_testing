@@ -19,8 +19,9 @@ public class InvalidBookIDTests extends BaseAPITest {
 
     @Test(description = "Verify getting a book by ID with invalid Id format")
     public void testGetBookById_WithInvalidId() {
-        int invalidBookId = -5; 
-        Response response = bookAPIClient.getBookById("admin", invalidBookId);
+        int invalidBookId = -5;
+        String userName = "admin";
+        Response response = bookAPIClient.getBookById(userName, invalidBookId);
         APIResponseValidator.validateBadRequest(response); 
     }
 }
