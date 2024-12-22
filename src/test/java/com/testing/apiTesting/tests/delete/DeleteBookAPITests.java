@@ -27,7 +27,6 @@ public class DeleteBookAPITests extends BaseAPITest {
 
         // Validate successful deletion
         APIResponseValidator.validateSuccessfulDeletion(deleteResponse);
-
     }
 
     @Test(description = "Verify unauthorized access is prevented when deleting a book")
@@ -40,7 +39,16 @@ public class DeleteBookAPITests extends BaseAPITest {
 
         // Validate unauthorized access response
         APIResponseValidator.validateUnauthorizedAccess(deleteResponse);
-
     }
 
+    @Test(description = "Verify deletion of a non-existent book")
+    public void testDeleteBook_NonExistentBook() {
+
+        String username = "admin";
+        int nonExistentBookId = 999;
+
+        Response deleteResponse = bookAPIClient.deleteBook(username, nonExistentBookId);
+
+        APIResponseValidator.validateInvalidId(deleteResponse);
+    }
 }
