@@ -55,13 +55,7 @@ public class APIResponseValidator {
     public static void validateUnauthorizedAccess(Response response) {
         Assert.assertEquals(response.getStatusCode(), 403, "Unauthorized access should be forbidden");
     }
-      public static void validateInvalidID(Response response, int invalidBookId) {
-        Assert.assertEquals(response.getStatusCode(), 400, "Expected status code 400");
-
-        JsonPath jsonPath = response.jsonPath();
-        Assert.assertEquals(jsonPath.getInt("id"), invalidBookId, "Book ID does not match");
-
+      public static void validateInvalidId(Response response) {
+        Assert.assertEquals(response.getStatusCode(), 404, "Expected status code 404");
     }
-
-    
 }
