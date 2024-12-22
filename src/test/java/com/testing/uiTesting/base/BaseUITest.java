@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseUITest {
 
-    //why this is protected?
     protected WebDriver driver;
 
     @BeforeMethod
