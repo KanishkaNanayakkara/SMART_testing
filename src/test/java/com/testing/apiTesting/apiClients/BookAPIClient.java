@@ -23,9 +23,9 @@ public class BookAPIClient {
             .get("/api/books");
     }
 
-    public Response getBookById(String username, int bookId) {
+    public Response getBookById(String username, int bookID) {
         return baseTest.authAs(username)
-            .get("/api/books/" + bookId);
+            .get("/api/books/" + bookID);
     }
 
     public Response updateBook(String username, int bookId, Map<String, Object> bookData) {
