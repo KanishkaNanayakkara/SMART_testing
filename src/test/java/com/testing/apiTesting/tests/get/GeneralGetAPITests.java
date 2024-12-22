@@ -55,6 +55,14 @@ public class GeneralGetAPITests extends BaseAPITest {
         Response response = bookAPIClient.getAllBooks(generalUser);
         APIResponseValidator.validateRetrievalEmptyDatabase(response);
     }
+
+    @Test(description = "Verify getting a book by non-exist book id")
+    public void testGetBookById_NonExistBookId() {
+        int nonExistBookId = 999;
+
+        Response response = bookAPIClient.getBookById(adminUser, nonExistBookId);
+        APIResponseValidator.validateInvalidId(response);
+    }
 }
 
 
