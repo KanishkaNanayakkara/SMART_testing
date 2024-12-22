@@ -70,7 +70,7 @@ jobs:
           wget -N https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip -d /usr/local/bin
 
-      Run UI Tests
+      # Run UI Tests
       - name: Run UI Tests
         run: |
           mvn -Dtest="com.selenium.testing.uiTesting.*" test
