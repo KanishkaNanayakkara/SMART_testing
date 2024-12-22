@@ -3,6 +3,7 @@ package com.testing.apiTesting.tests;
 import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
+import com.testing.apiTesting.utils.TestUtils;
 
 import io.restassured.response.Response;
 
@@ -12,13 +13,15 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InvalidBookUpdateTest extends BaseAPITest {
+public class TestUpdateBook_withInvalidData extends BaseAPITest {
 
     private BookAPIClient bookAPIClient;
+    private TestUtils testUtils;
 
     @BeforeMethod
     public void setup() {
         bookAPIClient = new BookAPIClient(this);
+        testUtils = new TestUtils();
     }
 
     @Test
@@ -26,15 +29,9 @@ public class InvalidBookUpdateTest extends BaseAPITest {
 
         String username = "admin";
 
-        String uniqueSuffix = String.valueOf(System.currentTimeMillis());
+        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "First Book Title", "First Author", username);
 
-        Map<String, Object> initialBookData = new HashMap<>();
-        initialBookData.put("title", "Valid Title " + uniqueSuffix);
-        initialBookData.put("author", "Valid Author " + uniqueSuffix);
-
-        Response createResponse = bookAPIClient.createBook(username, initialBookData);
-
-        Integer createdBookId = createResponse.jsonPath().getInt("id");
+        Integer createdBookId = createValiedBook.jsonPath().getInt("id");
         
         Map<String, Object> invalidBookData = new HashMap<>();
         invalidBookData.put("id", createdBookId);
