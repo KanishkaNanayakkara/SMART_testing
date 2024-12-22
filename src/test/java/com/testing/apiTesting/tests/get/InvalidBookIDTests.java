@@ -1,4 +1,4 @@
-package com.testing.apiTesting.tests;
+package com.testing.apiTesting.tests.get;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -7,7 +7,7 @@ import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
 
-public class InvalidBookIDTest extends BaseAPITest {
+public class InvalidBookIDTests extends BaseAPITest {
 
 
     private BookAPIClient bookAPIClient;
@@ -17,10 +17,11 @@ public class InvalidBookIDTest extends BaseAPITest {
         bookAPIClient = new BookAPIClient(this);
     }
 
-    @Test(description = "Verify getting a book by ID with invalid response")
-    public void testGetBookById_ValidScenario() {
-        int invalidBookId = 1; 
-        Response response = bookAPIClient.getBookById("admin", invalidBookId);
-        APIResponseValidator.validateInvalidID(response, invalidBookId); 
+    @Test(description = "Verify getting a book by ID with invalid Id format")
+    public void testGetBookById_WithInvalidId() {
+        int invalidBookId = -5;
+        String userName = "admin";
+        Response response = bookAPIClient.getBookById(userName, invalidBookId);
+        APIResponseValidator.validateBadRequest(response); 
     }
 }
