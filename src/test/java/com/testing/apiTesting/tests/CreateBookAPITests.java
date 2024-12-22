@@ -1,4 +1,4 @@
-package com.testing.apiTesting.tests.delete;
+package com.testing.apiTesting.tests;
 
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
