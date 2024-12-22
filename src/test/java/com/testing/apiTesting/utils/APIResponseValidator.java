@@ -77,7 +77,4 @@ public class APIResponseValidator {
     public static void invalidBookUpdate(Response response) {
         Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for invalid book update");
     }
-    public static void notExistBookUpdate(Response response) {
-        Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for non-existent book update");
-    }
 }
