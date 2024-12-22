@@ -1,4 +1,4 @@
-package com.testing.apiTesting.tests;
+package com.testing.apiTesting.tests.get;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
