@@ -10,7 +10,7 @@ import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
 import com.testing.apiTesting.utils.BookDataFactory;
 
-public class CreateBookAPITest extends BaseAPITest {
+public class CreateBookAPITests extends BaseAPITest {
 
     private BookAPIClient bookPage;
 
@@ -24,11 +24,5 @@ public class CreateBookAPITest extends BaseAPITest {
         Map<String, Object> bookData = BookDataFactory.createValidBook();
         Response response = bookPage.createBook("admin", bookData);
         APIResponseValidator.validateSuccessfulCreation(response);
-    }
-
-    @Test(description = "Verify getting all books")
-    public void testGetAllBooks() {
-        Response response = bookPage.getAllBooks("user");
-        APIResponseValidator.validateSuccessfulRetrieval(response);
     }
 }
