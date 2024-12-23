@@ -13,8 +13,6 @@ public class PIMPage {
 
     private WebDriver driver;
 
-    //div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--focus']//input[@placeholder='Type for hints...']
-
     @FindBy(xpath = "//input[@placeholder='Type for hints...']")
     private WebElement txt_employee_name;
 
@@ -32,8 +30,6 @@ public class PIMPage {
 
     @FindBy(xpath = "//div[@role='rowgroup']//div[@role='row']")
     private List<WebElement> tableRows;
-
-    //body/div[@id='app']/div[@class='oxd-layout orangehrm-upgrade-layout']/div[@class='oxd-layout-container']/div[@class='oxd-layout-context']/div[@class='orangehrm-background-container']/div[@class='orangehrm-paper-container']/div[@class='orangehrm-container']/div[@role='table']/div[2]/div[1]/div[1]
 
     public PIMPage(WebDriver driver) {
         this.driver = driver;
