@@ -10,11 +10,9 @@ public class SideBarNavigationPanelPage {
     private WebDriver driver;
 
     @FindBy(xpath = "//span[normalize-space()='Admin']")
-    private WebElement btn_search;
+    private WebElement btn_search; 
 
-    //a[@class='oxd-main-menu-item active']
-
-    @FindBy(xpath = "//a[@class='oxd-main-menu-item active']")
+    @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='PIM']")
     private WebElement btn_pim;
 
     public SideBarNavigationPanelPage(WebDriver driver) {

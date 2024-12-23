@@ -1,5 +1,7 @@
 package com.testing.uiTesting.tests;
 
+import java.util.List;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.testing.uiTesting.base.BaseUITest;
@@ -10,8 +12,8 @@ import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
 public class SearchEmployeeTest extends BaseUITest{
 
     @Test
-    public void testSearchEmployeeByName() {
-        // Step 1: Login
+    public void testSearchEmployeeByName() throws InterruptedException {
+        //Login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.setUserName("Admin");
         loginPage.setPassword("admin123");
@@ -21,17 +23,18 @@ public class SearchEmployeeTest extends BaseUITest{
         //navigate to PIM
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         sideBarNavigationPanelPage.clickPIM();
-        // Assert.assertEquals(driver.getTitle(), "PIM");
+        Assert.assertTrue(driver.findElement(By.xpath("//input[@placeholder='Type for hints...']")).isDisplayed(), 
+                  "Failed to navigate to the PIM page!");
 
-        // Step 3: Search for employee
+        //Search for employee
         PIMPage pimPage = new PIMPage(driver);
-        String employeeName = "Amelia"; // Replace with the actual name in your test data
-        pimPage.typeEmployeeName(employeeName);
+        String searchedEmployeeName = pimPage.typeEmployeeName();
         pimPage.clickSearch();
 
-        // Step 4: Verify the result
-        String displayedName = pimPage.getDisplayedEmployeeName();
-        Assert.assertEquals(displayedName, employeeName, "Employee name does not match!");
+        //Verify the result
+        List<String> displayedNames = pimPage.getDisplayedEmployeeNamesafterSearchKeyApplied();
+        Assert.assertTrue(displayedNames.contains(searchedEmployeeName), 
+                "The employee name is not displayed in the search results! Expected: " + searchedEmployeeName + ", Found: " + displayedNames);
     }
     
 }
