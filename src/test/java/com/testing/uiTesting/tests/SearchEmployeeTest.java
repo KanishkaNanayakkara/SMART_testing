@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.testing.uiTesting.base.BaseUITest;
-import com.testing.uiTesting.pages.LoginPage;
 import com.testing.uiTesting.pages.PIMPage;
 import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
 
@@ -13,12 +12,6 @@ public class SearchEmployeeTest extends BaseUITest{
 
     @Test
     public void testSearchEmployeeByName() throws InterruptedException {
-        //Login
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.setUserName("Admin");
-        loginPage.setPassword("admin123");
-        loginPage.clickLogin();
-        Assert.assertEquals(driver.getTitle(), "OrangeHRM", "Login failed!");
 
         //navigate to PIM
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
