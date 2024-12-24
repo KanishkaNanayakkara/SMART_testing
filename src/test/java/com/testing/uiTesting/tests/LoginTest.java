@@ -10,6 +10,7 @@ public class LoginTest extends BaseUITest {
     @Test
     public void testSuccessfulLogin() {
         LoginPage loginPage = new LoginPage(driver);
+        loginPage.logout();
         loginPage.setUserName("Admin");
         loginPage.setPassword("admin123");
         loginPage.clickLogin();
