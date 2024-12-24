@@ -29,7 +29,7 @@ public class TestUpdateBook_withInvalidData extends BaseAPITest {
 
         String username = "admin";
 
-        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "First Book Title", "First Author", username);
+        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "Test Book 8", "Test Author 8", username);
 
         Integer createdBookId = createValiedBook.jsonPath().getInt("id");
         

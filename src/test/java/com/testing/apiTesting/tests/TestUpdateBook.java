@@ -27,7 +27,7 @@ public class TestUpdateBook extends BaseAPITest {
     public void testValidBookUpdate() {
         String username = "admin";
 
-        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "First Book Title", "First Author", username);
+        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "Test Book 9", "Test Author 9", username);
         
         Integer createdBookId = createValiedBook.jsonPath().getInt("id");
 

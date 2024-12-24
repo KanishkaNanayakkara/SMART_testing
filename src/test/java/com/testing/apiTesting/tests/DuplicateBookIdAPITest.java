@@ -26,14 +26,14 @@ public class DuplicateBookIdAPITest extends BaseAPITest {
     public void testDuplicateBookIdHandling() {
         String username = "admin";
 
-        Response createdBook = testUtils.createTestBook(bookAPIClient, "First Book Title", "First Author", username);
+        Response createdBook = testUtils.createTestBook(bookAPIClient, "Test Book 10", "Test Author 10", username);
 
         int bookId = createdBook.jsonPath().getInt("id");
 
         Response duplicateResponse = bookAPIClient.createBook(username, Map.of(
             "id", bookId,
-            "title", "First Book Title",
-            "author", "First Author"
+            "title", "Test Book 10",
+            "author", "Test Author 10"
         ));
 
         APIResponseValidator.validateDuplicateCreation(duplicateResponse);
