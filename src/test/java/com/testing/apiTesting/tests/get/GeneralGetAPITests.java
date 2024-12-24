@@ -63,6 +63,13 @@ public class GeneralGetAPITests extends BaseAPITest {
         Response response = bookAPIClient.getBookById(adminUser, nonExistBookId);
         APIResponseValidator.validateInvalidId(response);
     }
+
+    @Test(description = "Verify getting a book by ID with invalid Id format")
+    public void testGetBookById_WithInvalidId() {
+        int invalidBookId = -5;
+        Response response = bookAPIClient.getBookById(adminUser, invalidBookId);
+        APIResponseValidator.validateBadRequest(response); 
+    }
 }
 
 
