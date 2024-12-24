@@ -21,7 +21,7 @@ public class MyinfoTests extends BaseUITest {
         // navigate to MyInfo
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         sideBarNavigationPanelPage.clickMyInfo();
-        
+
         // Update data
         MyInfoPage myinfopage = new MyInfoPage(driver);
         String employeeName = "Amarabandu";
@@ -32,10 +32,11 @@ public class MyinfoTests extends BaseUITest {
         String successMessage = MyInfoPage.getSuccessMessage();
         Assert.assertTrue(successMessage.contains("Successfully Updated"), "Update successful!");
 
-           // Validate that the employee name is updated correctly
-   
+        // Validate that the employee name is updated correctly
+        String updatedEmployeeName = myinfopage.getUpdatedEmployeeName(); 
+        Assert.assertEquals(updatedEmployeeName, employeeName, "The updated employee name match the input.");
     }
-    
+
     @Test
     public void testFieldValidation() {
         // Login
@@ -48,20 +49,17 @@ public class MyinfoTests extends BaseUITest {
         // navigate to MyInfo
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         sideBarNavigationPanelPage.clickMyInfo();
-        
+
         // Update data
         MyInfoPage myinfopage = new MyInfoPage(driver);
         String employeeName = "shehandddddddddddddddddddddddddddddddddddddddddddddddddddd";
         myinfopage.typeEmployeeName(employeeName);
         // myinfopage.clickSave();
 
-
         // Validate success message
-        String errorMessage = MyInfoPage.getErrorMessage(); 
+        String errorMessage = MyInfoPage.getErrorMessage();
         Assert.assertTrue(errorMessage.contains("Should not exceed 30 characters"), "Validation passed!");
 
-
-        
     }
 
 }
