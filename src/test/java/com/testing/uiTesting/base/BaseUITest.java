@@ -7,8 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.Cookie;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -18,7 +19,7 @@ public class BaseUITest {
     protected WebDriver driver;
     private static Set<Cookie> savedCookies;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
         // Set up WebDriverManager to handle ChromeDriver
         WebDriverManager.chromedriver().setup();
@@ -46,7 +47,7 @@ public class BaseUITest {
         driver.manage().window().maximize();
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() {
         if (driver != null) {
             driver.quit();
