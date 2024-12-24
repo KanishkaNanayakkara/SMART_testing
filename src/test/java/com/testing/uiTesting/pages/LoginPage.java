@@ -18,6 +18,12 @@ public class LoginPage {
     @FindBy(xpath = "//button[normalize-space()='Login']")
     private WebElement btn_login;
 
+    @FindBy(xpath = "//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']")
+    private WebElement btn_profile_dropdown;
+
+    @FindBy(xpath = "//a[normalize-space()='Logout']")
+    private WebElement btn_logout;
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -29,6 +35,11 @@ public class LoginPage {
 
     public void setPassword(String password) {
         txt_password.sendKeys(password);
+    }
+
+    public void logout() {
+        btn_profile_dropdown.click();
+        btn_general_logout.click();
     }
 
     public void clickLogin( ) {
