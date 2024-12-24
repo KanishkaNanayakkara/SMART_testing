@@ -1,6 +1,5 @@
 package com.testing.uiTesting.pages.PIM;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
