@@ -9,12 +9,14 @@ import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
 import com.testing.apiTesting.utils.BookDataFactory;
+import com.testing.apiTesting.utils.TestUtils;
 
 import java.util.Map;
 
 public class GeneralPostAPITests extends BaseAPITest {
 
     private BookAPIClient bookAPIClient;
+    private TestUtils testUtils;
 
     String title = "";
     String author = "";
@@ -24,6 +26,7 @@ public class GeneralPostAPITests extends BaseAPITest {
     @BeforeMethod
     public void setUp(){
         bookAPIClient = new BookAPIClient(this);
+        testUtils = new TestUtils();
     }
 
     @Test(description = "Verify creating a book with valid data")
@@ -76,5 +79,21 @@ public class GeneralPostAPITests extends BaseAPITest {
         Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
         Response response = bookAPIClient.createBook(adminUser, bookData);
         APIResponseValidator.validateBadRequest(response);
+    }
+
+    @Test(description = "Verify duplicate book id handling")
+    public void testDuplicateBookIdHandling() {
+
+        Response createdBook = testUtils.createTestBook(bookAPIClient, "Test Book 10", "Test Author 10", adminUser);
+
+        int bookId = createdBook.jsonPath().getInt("id");
+
+        Response duplicateResponse = bookAPIClient.createBook(adminUser, Map.of(
+            "id", bookId,
+            "title", "Test Book 10",
+            "author", "Test Author 10"
+        ));
+
+        APIResponseValidator.validateDuplicateCreation(duplicateResponse);
     }
 }

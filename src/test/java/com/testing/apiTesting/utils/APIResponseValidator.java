@@ -58,4 +58,19 @@ public class APIResponseValidator {
       public static void validateInvalidId(Response response) {
         Assert.assertEquals(response.getStatusCode(), 404, "Expected status code 404");
     }
+    public static void validateDuplicateCreation(Response response) {
+        int statusCode = response.statusCode();
+        if (statusCode == 409) {
+            Assert.assertEquals(statusCode, 409, "Expected 409 Conflict for duplicate book ID");
+        } else if (statusCode == 208) {
+            Assert.assertEquals(statusCode, 208, "Expected 208 Already Reported for duplicate book ID");
+        }
+    }
+    public static void updateBookTest(Response response) {
+        Assert.assertEquals(response.jsonPath().getString("title"), "Updated Book Title", "Title did not update correctly");
+        Assert.assertEquals(response.jsonPath().getString("author"), "Updated Author", "Author did not update correctly");
+    }
+    public static void invalidBookUpdate(Response response) {
+        Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for invalid book update");
+    }
 }
