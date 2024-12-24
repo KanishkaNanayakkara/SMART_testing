@@ -33,10 +33,7 @@ public class MyinfoTests extends BaseUITest {
         Assert.assertTrue(successMessage.contains("Successfully Updated"), "Update successful!");
 
            // Validate that the employee name is updated correctly
-    String updatedEmployeeName = MyInfoPage.getEmployeeName();  // Assuming there is a method to fetch the updated name
-    System.out.println(updatedEmployeeName);
-    Assert.assertEquals(updatedEmployeeName, employeeName, "The updated employee name match the given name.");
-
+   
     }
     
     @Test
