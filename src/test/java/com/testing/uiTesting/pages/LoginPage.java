@@ -39,7 +39,7 @@ public class LoginPage {
 
     public void logout() {
         btn_profile_dropdown.click();
-        btn_general_logout.click();
+        btn_logout.click();
     }
 
     public void clickLogin( ) {
