@@ -54,7 +54,7 @@ public class MyinfoTests extends BaseUITest {
         MyInfoPage myinfopage = new MyInfoPage(driver);
         String employeeName = "shehandddddddddddddddddddddddddddddddddddddddddddddddddddd";
         myinfopage.typeEmployeeName(employeeName);
-        // myinfopage.clickSave();
+ 
 
         // Validate success message
         String errorMessage = MyInfoPage.getErrorMessage();

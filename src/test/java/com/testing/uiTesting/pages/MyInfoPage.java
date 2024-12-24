@@ -53,7 +53,7 @@ public class MyInfoPage {
     }
 
     public String getUpdatedEmployeeName() {
-        return txt_employee_name.getDomProperty("value"); // Fetches the value currently in the input field
+        return txt_employee_name.getDomProperty("value"); 
     }
 
 }
