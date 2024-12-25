@@ -12,20 +12,13 @@ public class MyinfoTests extends BaseUITest {
 
     @Test
     public void verifyEmployeeNameUpdateSuccess() {
-        // Step 1: Login
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.setUserName("Admin");
-        loginPage.setPassword("admin123");
-        loginPage.clickLogin();
-        Assert.assertEquals(driver.getTitle(), "OrangeHRM", "Login failed!");
-
         // navigate to MyInfo
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         sideBarNavigationPanelPage.clickMyInfo();
 
         // Update data
         MyInfoPage myinfopage = new MyInfoPage(driver);
-        String employeeName = "Amarabandu";
+        String employeeName = "Shehan";
         myinfopage.typeEmployeeName(employeeName);
         myinfopage.clickSave();
 
@@ -40,12 +33,6 @@ public class MyinfoTests extends BaseUITest {
 
     @Test
     public void verifyEmployeeNameFieldValidation() {
-        // Login
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.setUserName("Admin");
-        loginPage.setPassword("admin123");
-        loginPage.clickLogin();
-        Assert.assertEquals(driver.getTitle(), "OrangeHRM", "Login failed!");
 
         // navigate to MyInfo
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
@@ -53,7 +40,7 @@ public class MyinfoTests extends BaseUITest {
 
         // Update data
         MyInfoPage myinfopage = new MyInfoPage(driver);
-        String employeeName = "shehandddddddddddddddddddddddddddddddddddddddddddddddddddd";
+        String employeeName = "Rupasinghe arachchige Shehan Devaka Rupasinghe";
         myinfopage.typeEmployeeName(employeeName);
  
 
