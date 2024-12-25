@@ -2,6 +2,7 @@ package com.testing.uiTesting.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import com.testing.uiTesting.base.BaseUITest;
 import com.testing.uiTesting.pages.LoginPage;
 import com.testing.uiTesting.pages.MyInfoPage;
@@ -10,7 +11,7 @@ import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
 public class MyinfoTests extends BaseUITest {
 
     @Test
-    public void testUpdateEmployeeName() {
+    public void verifyEmployeeNameUpdateSuccess() {
         // Step 1: Login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.setUserName("Admin");
@@ -38,7 +39,7 @@ public class MyinfoTests extends BaseUITest {
     }
 
     @Test
-    public void testFieldValidation() {
+    public void verifyEmployeeNameFieldValidation() {
         // Login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.setUserName("Admin");
