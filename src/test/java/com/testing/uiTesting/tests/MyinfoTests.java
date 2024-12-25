@@ -1,10 +1,7 @@
 package com.testing.uiTesting.tests;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import com.testing.uiTesting.base.BaseUITest;
-import com.testing.uiTesting.pages.LoginPage;
 import com.testing.uiTesting.pages.MyInfoPage;
 import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
 
@@ -12,6 +9,7 @@ public class MyinfoTests extends BaseUITest {
 
     @Test
     public void verifyEmployeeNameUpdateSuccess() {
+        
         // navigate to MyInfo
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         sideBarNavigationPanelPage.clickMyInfo();
