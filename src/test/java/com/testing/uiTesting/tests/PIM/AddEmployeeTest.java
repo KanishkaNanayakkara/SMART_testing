@@ -11,7 +11,7 @@ import com.testing.uiTesting.utils.Utils;
 public class AddEmployeeTest extends BaseUITest{
      
     @Test(priority = 1)
-    public void addEmployee() throws Exception {
+    public void verifyEmployeeCanBeAddedSuccessfully() throws Exception {
         AddEmployeePage addEmployeePage = new AddEmployeePage(driver);
         addEmployeePage.navigateToAddEmployeePage();
 
@@ -41,7 +41,7 @@ public class AddEmployeeTest extends BaseUITest{
     }
 
     @Test(priority = 2)
-    public void createEmployeeWithoutFirtsName() throws InterruptedException, IOException, ParseException {
+    public void verifyErrorMessageWhenFirstNameIsMissing() throws InterruptedException, IOException, ParseException {
         AddEmployeePage addEmployeePage = new AddEmployeePage(driver);
         addEmployeePage.navigateToAddEmployeePage();
         String lastName = "Nanayakkara";

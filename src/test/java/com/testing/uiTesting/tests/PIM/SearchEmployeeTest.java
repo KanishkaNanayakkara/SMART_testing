@@ -9,7 +9,7 @@ import com.testing.uiTesting.pages.PIM.PIMPage;
 public class SearchEmployeeTest extends BaseUITest{
 
     @Test
-    public void testSearchEmployeeByName() {
+    public void verifySearchEmployeeByNameDisplaysCorrectResults() {
         PIMPage pimPage = new PIMPage(driver);
         pimPage.navigateToPIM();
         String searchedEmployeeName = pimPage.typeEmployeeName();
@@ -22,7 +22,7 @@ public class SearchEmployeeTest extends BaseUITest{
     }
 
     @Test
-    public void testSearchEmployeeById() {
+    public void verifySearchEmployeeByIdDisplaysCorrectResults() {
         PIMPage pimPage = new PIMPage(driver);
         pimPage.navigateToPIM();
         String searchedEmployeeId = pimPage.typeEmployeeId();
