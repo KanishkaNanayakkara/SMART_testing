@@ -1,6 +1,7 @@
 package com.testing.uiTesting.pages.applyLeave;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -116,14 +117,20 @@ public class ApplyLeavePage {
         submit_button.click();
     }
 
-    public boolean isLeaveRequestInFirstRow(String expectedDate, String expectedLeaveType, String expectedStatus) {
-        String actualDate = firstRowDate.getText();
-        String actualLeaveType = firstRowLeaveType.getText();
-        String actualStatus = firstRowStatus.getText();
-    
-        return actualDate.equals(expectedDate) &&
-               actualLeaveType.equals(expectedLeaveType) &&
-               actualStatus.contains(expectedStatus);
+    public boolean isLeaveRequestPresent(String expectedDate, String expectedLeaveType, String expectedStatus) {
+        List<WebElement> rows = driver.findElements(By.xpath("//div[@class='oxd-table-body']//div[@role='row']"));
+
+        for (WebElement row : rows) {
+            String date = row.findElement(By.xpath(".//div[@role='cell'][2]/div")).getText().trim();
+            String leaveType = row.findElement(By.xpath(".//div[@role='cell'][4]/div")).getText().trim();
+            String status = row.findElement(By.xpath(".//div[@role='cell'][7]/div")).getText().trim();
+
+            if (date.equals(expectedDate) && leaveType.equals(expectedLeaveType) && status.contains(expectedStatus)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void navigateToMyLeaveRequestPage() {

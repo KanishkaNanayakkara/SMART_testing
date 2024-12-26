@@ -30,7 +30,7 @@ public class ApplyLeaveTest extends BaseUITest {
         String expectedStatus = "Pending Approval";
         applyLeavePage.navigateToMyLeaveRequestPage();
         
-        boolean isLeaveRequestPresent = applyLeavePage.isLeaveRequestInFirstRow(
+        boolean isLeaveRequestPresent = applyLeavePage.isLeaveRequestPresent(
             expectedDate,
             expectedLeaveType,
             expectedStatus
