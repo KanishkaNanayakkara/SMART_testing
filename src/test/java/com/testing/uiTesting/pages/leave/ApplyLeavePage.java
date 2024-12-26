@@ -52,8 +52,9 @@ public class ApplyLeavePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement submit_button;
 
-    @FindBy(xpath = "//div[@class='oxd-toast-content oxd-toast-content--success']")
+    @FindBy(xpath = "//div[@class='oxd-toast oxd-toast--success oxd-toast-container--toast']")
     public WebElement confirmation_message;
+    
 
     public ApplyLeavePage(WebDriver driver) {
         this.driver = driver;
