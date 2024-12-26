@@ -1,4 +1,4 @@
-package com.testing.uiTesting.pages.applyLeave;
+package com.testing.uiTesting.pages.leave;
 
 import java.time.Duration;
 import java.util.List;
@@ -22,12 +22,6 @@ public class ApplyLeavePage {
 
     private String apply_leave_request_url = "https://opensource-demo.orangehrmlive.com/web/index.php/leave/applyLeave";
 
-    @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='Leave']")
-    private WebElement sidebar_leave_option;
-
-    @FindBy(xpath = "//a[normalize-space()='Apply']")
-    private WebElement apply_leave_button;
-
     @FindBy(xpath = "//label[text()='Leave Type']/following::div[@class='oxd-select-text oxd-select-text--active']")
     private WebElement leave_type_dropdown;
 
@@ -41,7 +35,7 @@ public class ApplyLeavePage {
     private WebElement to_date_input;
 
     @FindBy(xpath = "//label[text()='Duration']/following::div[contains(@class, 'oxd-select-text')][1]")
-    private WebElement durationDropdown;
+    private WebElement duration_dropdown;
 
     @FindBy(xpath = "//div[contains(@class, 'oxd-select-option')][2]")
     private WebElement first_option_from_duration_dropdown;
@@ -52,7 +46,6 @@ public class ApplyLeavePage {
     @FindBy(xpath = "//div[contains(@class, 'oxd-select-option')][2]")
     private WebElement first_option_partial_days;
 
-
     @FindBy(xpath = "//textarea[contains(@class, 'oxd-textarea--active')]")
     private WebElement comment_input;
 
@@ -60,31 +53,7 @@ public class ApplyLeavePage {
     private WebElement submit_button;
 
     @FindBy(xpath = "//div[@class='oxd-toast-content oxd-toast-content--success']")
-    public WebElement confirmationMessage;
-
-    @FindBy(xpath = "//div[@class='oxd-table-body']//div[@class='oxd-table-card'][1]//div[@role='cell'][2]/div")
-    private WebElement firstRowDate;
-
-    @FindBy(xpath = "//div[@class='oxd-table-body']//div[@class='oxd-table-card'][1]//div[@role='cell'][3]/div")
-    private WebElement firstRowEmployeeName;
-
-    @FindBy(xpath = "//div[@class='oxd-table-body']//div[@class='oxd-table-card'][1]//div[@role='cell'][4]/div")
-    private WebElement firstRowLeaveType;
-
-    @FindBy(xpath = "//div[@class='oxd-table-body']//div[@class='oxd-table-card'][1]//div[@role='cell'][7]/div")
-    private WebElement firstRowStatus;
-
-    @FindBy(xpath = "//p[@class='oxd-userdropdown-name']")
-    private WebElement firstNameInput;
-
-    @FindBy(xpath = "//input[@name='middleName']")
-    private WebElement middleNameInput;
-
-    @FindBy(xpath = "//input[@name='lastName']")
-    private WebElement lastNameInput;
-
-    @FindBy(xpath = "//span[normalize-space()='My Info']")
-    private WebElement my_info_tab;
+    public WebElement confirmation_message;
 
     public ApplyLeavePage(WebDriver driver) {
         this.driver = driver;
@@ -105,14 +74,17 @@ public class ApplyLeavePage {
         to_date_input.sendKeys(Keys.CONTROL + "a");
         to_date_input.sendKeys(Keys.DELETE);
         to_date_input.sendKeys(toDate);
+
         if (isElementVisible(partial_days_dropdown)) {
             partial_days_dropdown.click();
             first_option_partial_days.click();
         }
-        if (!isOptionAlreadySelected(durationDropdown, "Full Day")) {
-            durationDropdown.click();
+
+        if (!isOptionAlreadySelected(duration_dropdown, "Full Day")) {
+            duration_dropdown.click();
             first_option_from_duration_dropdown.click();
         }
+        
         comment_input.sendKeys(comment);
         submit_button.click();
     }
@@ -137,8 +109,8 @@ public class ApplyLeavePage {
         driver.get(my_leave_request_url);
     }
 
-    public String getConfirmationMessage() {
-        return confirmationMessage.getText();
+    public String getConfirmation_message() {
+        return confirmation_message.getText();
     }
 
     private boolean isElementVisible(WebElement element) {

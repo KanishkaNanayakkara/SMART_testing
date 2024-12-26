@@ -1,4 +1,4 @@
-package com.testing.uiTesting.pages.filterLeave;
+package com.testing.uiTesting.pages.leave;
 
 import java.time.Duration;
 import java.util.List;
@@ -23,29 +23,14 @@ public class FilterLeavePage {
     @FindBy(xpath = "//button[@type='reset']")
     private WebElement reset_button;
 
-    @FindBy(xpath = "//div[contains(@class, 'oxd-multiselect-chips-area')]//span[contains(@class, 'oxd-multiselect-chips-selected')]//i[contains(@class, 'bi-x')]")
-    private WebElement clear_applied_filter;
-
     @FindBy(xpath = "//div[contains(@class, 'oxd-select-text')]")
-    private WebElement leaveStatusDropdown;
+    private WebElement leave_status_dropdown;
 
     @FindBy(xpath = "//div[contains(@class, 'oxd-select-option')][2]")
-    private WebElement canceledOption;
+    private WebElement canceled_option;
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement apply_filter_button;
-
-    @FindBy(xpath = "//div[contains(@class, 'oxd-select-option')][2]")
-    private WebElement first_option;
-
-    @FindBy(xpath = "//label[text()='From Date']/following::input[1]")
-    private WebElement from_date_input;
-
-    @FindBy(xpath = "//label[text()='To Date']/following::input[1]")
-    private WebElement to_date_input;
-
-    @FindBy(xpath = "//label[text()='Duration']/following::div[contains(@class, 'oxd-select-text')][1]")
-    private WebElement durationDropdown;
 
     public FilterLeavePage(WebDriver driver) {
         this.driver = driver;
@@ -59,8 +44,8 @@ public class FilterLeavePage {
 
     public void applyFilter() {
         reset_button.click();
-        leaveStatusDropdown.click();
-        canceledOption.click();
+        leave_status_dropdown.click();
+        canceled_option.click();
         apply_filter_button.click();
         try {
             Thread.sleep(2000);

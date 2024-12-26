@@ -1,10 +1,10 @@
-package com.testing.uiTesting.tests.filterLeave;
+package com.testing.uiTesting.tests.leave;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.testing.uiTesting.base.BaseUITest;
-import com.testing.uiTesting.pages.filterLeave.FilterLeavePage;
+import com.testing.uiTesting.pages.leave.FilterLeavePage;
 
 public class FilterLeaveTest extends BaseUITest {
 
