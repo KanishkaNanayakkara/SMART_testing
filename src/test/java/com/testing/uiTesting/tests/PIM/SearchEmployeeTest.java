@@ -1,11 +1,11 @@
-package com.testing.uiTesting.tests.PIM;
+package com.testing.uiTesting.tests.pim;
 
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.testing.uiTesting.base.BaseUITest;
 import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
-import com.testing.uiTesting.pages.PIM.PIMPage;
+import com.testing.uiTesting.pages.pim.PIMPage;
 
 public class SearchEmployeeTest extends BaseUITest{
 

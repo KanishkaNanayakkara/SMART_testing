@@ -1,4 +1,4 @@
-package com.testing.uiTesting.pages.PIM;
+package com.testing.uiTesting.pages.pim;
 
 import java.util.ArrayList;
 import java.util.List;
