@@ -37,13 +37,19 @@ public class BaseUITest {
             for (Cookie cookie : savedCookies) {
                 driver.manage().addCookie(cookie);
             }
-            driver.navigate().refresh(); // Refresh to apply cookies
+            driver.navigate().refresh();
+    
+            // Check if login is still valid
+            if (!driver.getCurrentUrl().contains("dashboard")) {
+                performLogin();
+                savedCookies = driver.manage().getCookies();
+            }
         } else {
-            // Perform login if cookies are not available
+            // Perform login if no saved cookies
             performLogin();
-            savedCookies = driver.manage().getCookies(); // Save cookies after login
+            savedCookies = driver.manage().getCookies();
         }
-
+    
         driver.manage().window().maximize();
     }
 
