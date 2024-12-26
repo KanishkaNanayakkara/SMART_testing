@@ -1,4 +1,4 @@
-package com.testing.uiTesting.pages;
+package com.testing.uiTesting.pages.myInfo;
 import java.time.Duration;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

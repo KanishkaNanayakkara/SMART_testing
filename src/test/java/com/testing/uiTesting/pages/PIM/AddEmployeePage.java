@@ -1,4 +1,4 @@
-package com.testing.uiTesting.pages.PIM;
+package com.testing.uiTesting.pages.pim;
 
 import java.io.IOException;
 import org.openqa.selenium.Keys;

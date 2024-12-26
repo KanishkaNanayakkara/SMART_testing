@@ -1,11 +1,11 @@
-package com.testing.uiTesting.tests.PIM;
+package com.testing.uiTesting.tests.pim;
 
 import java.io.IOException;
 import java.text.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.testing.uiTesting.base.BaseUITest;
-import com.testing.uiTesting.pages.PIM.AddEmployeePage;
+import com.testing.uiTesting.pages.pim.AddEmployeePage;
 import com.testing.uiTesting.utils.Utils;
 
 public class AddEmployeeTest extends BaseUITest{

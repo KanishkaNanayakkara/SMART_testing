@@ -1,4 +1,4 @@
-package com.testing.uiTesting.tests;
+package com.testing.uiTesting.tests.dashboard;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.testing.uiTesting.base.BaseUITest;
