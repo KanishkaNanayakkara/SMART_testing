@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-
-import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
 
 public class PIMPage {
 
@@ -40,22 +37,12 @@ public class PIMPage {
     @FindBy(xpath = "//div[@class='oxd-input-group oxd-input-field-bottom-space']//div//input[@class='oxd-input oxd-input--active']")
     private WebElement input_employee_id; 
 
-    @FindBy(xpath = "//body/div[@id='app']/div[@class='oxd-layout orangehrm-upgrade-layout']/div[@class='oxd-layout-container']/div[@class='oxd-layout-context']/div[@class='orangehrm-background-container']/div[@class='oxd-table-filter']/div[@class='oxd-table-filter-area']/form[@class='oxd-form']/div[@class='oxd-form-row']/div[@class='oxd-grid-4 orangehrm-full-width-grid']/div[3]/div[1]/div[2]/div[1]/div[1]")
-    private WebElement input_employment_status;
-
     @FindBy(xpath = "//button[@type='reset']")
     private WebElement btn_reset;
 
     public PIMPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-    }
-
-    public void navigateToPIM() {
-        SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
-        sideBarNavigationPanelPage.clickPIM();
-        Assert.assertTrue(driver.findElement(By.xpath("//input[@placeholder='Type for hints...']")).isDisplayed(),
-                "Failed to navigate to the PIM page!");
     }
 
     public String typeEmployeeName() {
@@ -88,15 +75,6 @@ public class PIMPage {
         return EmployeeIdCell.getText();
     }
 
-    public String selectEmploymentStatusFromTheDropdownMenuToSearch() {
-        input_employment_status.click(); 
-        WebElement firstOption = driver.findElement(By.xpath("//div[@role='listbox']/div[1]")); // Get the first option
-        String selectedValue = firstOption.getText(); 
-        firstOption.click(); 
-        return selectedValue.trim();
-        
-    }
-
     public List<String> getDisplayedEmployeeNamesAfterSearchKeyApplied() {
         List<String> employeeNames = new ArrayList<>();
 
@@ -122,5 +100,4 @@ public class PIMPage {
 
         return EmploymentStatus;
     }
-
 }
