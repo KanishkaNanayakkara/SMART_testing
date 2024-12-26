@@ -12,6 +12,8 @@ public class ApplyLeavePage {
 
     private String my_leave_request_url = "https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewMyLeaveList";
 
+    private String apply_leave_request_url = "https://opensource-demo.orangehrmlive.com/web/index.php/leave/applyLeave";
+
     @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='Leave']")
     private WebElement sidebar_leave_option;
 
@@ -82,8 +84,7 @@ public class ApplyLeavePage {
     }
 
     public void navigateToApplyLeavePage() {
-        sidebar_leave_option.click();
-        apply_leave_button.click();
+        driver.get(apply_leave_request_url);
     }
 
     public void fillApplyLeaveForm(String fromDate, String toDate, String comment) {
