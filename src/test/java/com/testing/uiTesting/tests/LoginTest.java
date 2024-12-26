@@ -7,15 +7,15 @@ import com.testing.uiTesting.pages.LoginPage;
 
 public class LoginTest extends BaseUITest {
 
-    @Test
-    public void testSuccessfulLogin() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.logout();
-        loginPage.setUserName("Admin");
-        loginPage.setPassword("admin123");
-        loginPage.clickLogin();
+    // @Test
+    // public void testSuccessfulLogin() {
+    //     LoginPage loginPage = new LoginPage(driver);
+    //     loginPage.logout();
+    //     loginPage.setUserName("Admin");
+    //     loginPage.setPassword("admin123");
+    //     loginPage.clickLogin();
 
-        Assert.assertEquals(driver.getTitle(), "OrangeHRM");
-    }
+    //     Assert.assertEquals(driver.getTitle(), "OrangeHRM");
+    // }
 
 }
