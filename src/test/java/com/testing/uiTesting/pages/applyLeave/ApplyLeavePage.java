@@ -20,7 +20,7 @@ public class ApplyLeavePage {
     @FindBy(xpath = "//a[normalize-space()='Apply']")
     private WebElement apply_leave_button;
 
-    @FindBy(xpath = "//i[@class='oxd-icon bi-caret-up-fill oxd-select-text--arrow']")
+    @FindBy(xpath = "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/i[1]")
     private WebElement leave_type_dropdown;
 
     @FindBy(xpath = "//div[contains(@class, 'oxd-select-option')][2]")
