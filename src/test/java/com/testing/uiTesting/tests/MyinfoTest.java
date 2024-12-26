@@ -5,7 +5,7 @@ import com.testing.uiTesting.base.BaseUITest;
 import com.testing.uiTesting.pages.MyInfoPage;
 import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
 
-public class MyinfoTests extends BaseUITest {
+public class MyinfoTest extends BaseUITest {
 
     @Test
     public void verifyEmployeeNameUpdateSuccess() {
