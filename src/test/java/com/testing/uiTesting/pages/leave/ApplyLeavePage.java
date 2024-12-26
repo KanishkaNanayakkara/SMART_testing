@@ -111,6 +111,7 @@ public class ApplyLeavePage {
     }
 
     public String getConfirmation_message() {
+        wait.until(ExpectedConditions.visibilityOf(confirmation_message));
         return confirmation_message.getText();
     }
 
