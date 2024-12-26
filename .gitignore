@@ -6,3 +6,6 @@ target/
 
 # Ignore Allure-result
 allure-results/
+
+# Ignore Allure directory
+.allure/
