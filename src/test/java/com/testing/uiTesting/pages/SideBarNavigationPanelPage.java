@@ -18,6 +18,10 @@ public class SideBarNavigationPanelPage {
     @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='PIM']")
     private WebElement btn_pim;
 
+    //Locate the Recruitment menu option
+    @FindBy(xpath = "//span[normalize-space()='Recruitment']")
+    private WebElement recruitment;
+
     // Constructor to initialize the elements
     public SideBarNavigationPanelPage(WebDriver driver) {
         this.driver = driver;
@@ -42,6 +46,9 @@ public class SideBarNavigationPanelPage {
 
     public void clickPIM( ) {
         btn_pim.click();
+    }
+    public void clickRecruitment() {
+        recruitment.click();
     }
 
 }
