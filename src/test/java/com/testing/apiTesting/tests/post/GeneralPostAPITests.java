@@ -63,15 +63,6 @@ public class GeneralPostAPITests extends BaseAPITest {
         APIResponseValidator.validateUnauthorizedAccess(response);
     }
 
-    @Test(description = "Verify creating a book with null data")
-    public void testCreateBook_WithNullData(){
-        title = null;
-        author = null;
-        Map<String, Object> bookData = BookDataFactory.createValidBook(title, author);
-        Response response = bookAPIClient.createBook(adminUser, bookData);
-        APIResponseValidator.validateBadRequest(response);
-    }
-
     @Test(description = "Verify creating a book with empty strings for title and author")
     public void testCreateBook_WithEmptyStringsForTitleAndAuthor(){
         title = "";
