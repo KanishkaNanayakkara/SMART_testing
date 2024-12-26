@@ -28,8 +28,8 @@ public class DeleteBookAPITests extends BaseAPITest {
     @Test(description = "Verify successful deletion of a book by ID")
     public void testDeleteBook_SuccessScenario() {
         // Create book before delete
-        title = "Test Book 4";
-        author = "Test author 4";
+        title = "Test Book 8";
+        author = "Test author 8";
         Response response = testUtils.createTestBook(bookAPIClient, title, author, adminUser);
 
         int bookId = response.jsonPath().getInt("id");
