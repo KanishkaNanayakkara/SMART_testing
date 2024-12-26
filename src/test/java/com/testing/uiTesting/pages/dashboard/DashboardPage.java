@@ -1,4 +1,4 @@
-package com.testing.uiTesting.pages;
+package com.testing.uiTesting.pages.dashboard;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
