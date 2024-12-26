@@ -1,14 +1,21 @@
 package com.testing.uiTesting.pages.applyLeave;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ApplyLeavePage {
 
     private WebDriver driver;
+
+    private WebDriverWait wait;
 
     private String my_leave_request_url = "https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewMyLeaveList";
 
@@ -80,6 +87,7 @@ public class ApplyLeavePage {
 
     public ApplyLeavePage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
@@ -88,6 +96,7 @@ public class ApplyLeavePage {
     }
 
     public void fillApplyLeaveForm(String fromDate, String toDate, String comment) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'oxd-form-loader')]")));
         leave_type_dropdown.click();
         first_option.click();
         from_date_input.clear();
