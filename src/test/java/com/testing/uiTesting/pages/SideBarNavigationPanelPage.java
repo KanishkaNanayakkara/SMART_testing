@@ -11,7 +11,12 @@ public class SideBarNavigationPanelPage {
     // Locate the Leave menu option
     @FindBy(xpath = "//span[normalize-space()='My Info']")
     private WebElement myInfo;
-    
+
+    @FindBy(xpath = "//span[normalize-space()='Admin']")
+    private WebElement btn_search; 
+
+    @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='PIM']")
+    private WebElement btn_pim;
 
     // Constructor to initialize the elements
     public SideBarNavigationPanelPage(WebDriver driver) {
@@ -33,6 +38,10 @@ public class SideBarNavigationPanelPage {
     @SuppressWarnings("deprecation")
     public boolean isLeaveMenuActive() {
         return myInfo.getAttribute("class").contains("active");
+    }
+
+    public void clickPIM( ) {
+        btn_pim.click();
     }
 
 }
