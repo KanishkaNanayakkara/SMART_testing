@@ -15,6 +15,9 @@ public class SideBarNavigationPanelPage {
     @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='PIM']")
     private WebElement btn_pim;
 
+    @FindBy(xpath = "//span[normalize-space()='Recruitment']")
+    private WebElement recruitment;
+
     public SideBarNavigationPanelPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -34,6 +37,9 @@ public class SideBarNavigationPanelPage {
 
     public void clickPIM( ) {
         btn_pim.click();
+    }
+    public void clickRecruitment() {
+        recruitment.click();
     }
 
 }

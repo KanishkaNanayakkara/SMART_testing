@@ -2,7 +2,7 @@ package com.testing.uiTesting.tests.recruitment;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.testing.uiTesting.base.BaseUITest;
-import com.testing.uiTesting.pages.SideBarNavigationPanelPage;
+import com.testing.uiTesting.pages.sidebarNavigation.SideBarNavigationPanelPage;
 import com.testing.uiTesting.pages.recruitment.RecruitmentPage;
 
 public class RecruitmentTest extends BaseUITest {
