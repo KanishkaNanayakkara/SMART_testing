@@ -12,16 +12,12 @@ public class RecruitmentTest extends BaseUITest {
     public void verifyNavigationToRecruitmentModule() {
         
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
-        
-        //navigate to Recruitment page
+
         sideBarNavigationPanelPage.clickRecruitment();
 
-        // Step 2: Validate navigation to the "Recruitment" page
         String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates";
         String currentUrl = driver.getCurrentUrl();
-        System.out.println("currunt url is " + currentUrl);
 
-        // Validate the page URL
         Assert.assertEquals(currentUrl, expectedUrl, "Failed to navigate to the Recruitment page.");
     }
 
@@ -31,7 +27,6 @@ public class RecruitmentTest extends BaseUITest {
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         RecruitmentPage recruitmentPage = new RecruitmentPage(driver);
 
-        //navigate to Recruitment page
         sideBarNavigationPanelPage.clickRecruitment();
         
         String candidateFirstName = "Jhone";
@@ -50,7 +45,6 @@ public class RecruitmentTest extends BaseUITest {
         String Message = recruitmentPage.getSuccessMessage();
         String CreatedCandidateFirstName = recruitmentPage.getCreatedCandidateFirstName();
         String CreatedCandidateEmail = recruitmentPage.getCreatedCandidateEmail();
-        System.out.println("Message from system "+ Message);
 
         Assert.assertTrue(Message.toLowerCase().contains("successfully saved"), 
                   "The success message does not indicate the candidate was successfully saved. Message: ");
@@ -65,7 +59,6 @@ public class RecruitmentTest extends BaseUITest {
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         RecruitmentPage recruitmentPage = new RecruitmentPage(driver);
 
-        //navigate to Recruitment page
         sideBarNavigationPanelPage.clickRecruitment();
 
         String newCandidateFirstName = "Sunil";
@@ -89,9 +82,6 @@ public class RecruitmentTest extends BaseUITest {
         String updatedCandidateFirstName = recruitmentPage.getCreatedCandidateFirstName();
         String updatedCandidateLastName = recruitmentPage.getCreatedCandidateLastName();
         String updatedCandidateMobileNumber = recruitmentPage.getUpdatedCandidateMobileNumber();
-        System.out.println("new candidate first name "+ updatedCandidateFirstName);
-        System.out.println("new candidate last name "+ updatedCandidateLastName);
-        System.out.println("new candidate Mobile "+ updatedCandidateMobileNumber);
 
         Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), 
                   "The success message does not indicate the candidate was successfully Updated.");
