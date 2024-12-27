@@ -1,16 +1,24 @@
 package com.testing.uiTesting.pages.recruitment;
 
+import java.time.Duration;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RecruitmentPage {
 
+    private WebDriver driver;
+
     public RecruitmentPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
 
     @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--secondary']" )
     private WebElement btn_add;
@@ -70,16 +78,22 @@ public class RecruitmentPage {
         txt_contact.sendKeys(contact);
     }
     public void clearFirstName() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(txt_name_first));
         txt_name_first.click();
         txt_name_first.sendKeys(Keys.CONTROL + "a");
         txt_name_first.sendKeys(Keys.BACK_SPACE);
     }
     public void clearLastName() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(txt_name_last));
         txt_name_last.click();
         txt_name_last.sendKeys(Keys.CONTROL + "a");
         txt_name_last.sendKeys(Keys.BACK_SPACE);
     }
     public void clearContact(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(txt_contact));
         txt_contact.click();
         txt_contact.sendKeys(Keys.CONTROL + "a");
         txt_contact.sendKeys(Keys.BACK_SPACE);
@@ -109,6 +123,8 @@ public class RecruitmentPage {
         btn_search.click();
     }
     public void clickEdit(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(btn_edit));
         btn_edit.click();
     }
     public void clickSwitchEdit(){
