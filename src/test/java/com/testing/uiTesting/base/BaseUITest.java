@@ -20,19 +20,16 @@ public class BaseUITest {
 
     @BeforeClass
     public void setUp() {
-        // Set up WebDriverManager to handle ChromeDriver
+
+        System.setProperty("allure.results.directory", "target/allure-results");
         WebDriverManager.chromedriver().setup();
 
-        // Configure ChromeOptions
         ChromeOptions options = new ChromeOptions();
 
-        // Check if the environment is CI/CD
-        String isCiEnvironment = System.getenv("CI"); // CI is a common environment variable in GitHub Actions
+        String isCiEnvironment = System.getenv("CI");
         if (isCiEnvironment != null && isCiEnvironment.equals("true")) {
-            // CI/CD Environment
             options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu");
         } else {
-            // Local Environment
             options.addArguments("--start-maximized");
         }
 
@@ -40,20 +37,17 @@ public class BaseUITest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
-        // Restore cookies if they exist
         if (savedCookies != null) {
             for (Cookie cookie : savedCookies) {
                 driver.manage().addCookie(cookie);
             }
             driver.navigate().refresh();
     
-            // Check if login is still valid
             if (!driver.getCurrentUrl().contains("dashboard")) {
                 performLogin();
                 savedCookies = driver.manage().getCookies();
             }
         } else {
-            // Perform login if no saved cookies
             performLogin();
             savedCookies = driver.manage().getCookies();
         }
