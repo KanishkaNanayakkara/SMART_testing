@@ -54,7 +54,6 @@ public class ApplyLeavePage {
 
     @FindBy(xpath = "//div[@class='oxd-toast oxd-toast--success oxd-toast-container--toast']")
     public WebElement confirmation_message;
-    
 
     public ApplyLeavePage(WebDriver driver) {
         this.driver = driver;
