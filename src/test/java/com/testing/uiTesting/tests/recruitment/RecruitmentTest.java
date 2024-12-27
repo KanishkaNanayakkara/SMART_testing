@@ -50,7 +50,6 @@ public class RecruitmentTest extends BaseUITest {
                   "The success message does not indicate the candidate was successfully saved. Message: ");
         Assert.assertEquals(CreatedCandidateFirstName, candidateFirstName, "The candidate first name does not match the input.");
         Assert.assertEquals(CreatedCandidateEmail, candidateEmail, "The candidate email does not match the input.");
-
     }
 
     @Test
@@ -83,13 +82,9 @@ public class RecruitmentTest extends BaseUITest {
         String updatedCandidateLastName = recruitmentPage.getCreatedCandidateLastName();
         String updatedCandidateMobileNumber = recruitmentPage.getUpdatedCandidateMobileNumber();
 
-        Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), 
-                  "The success message does not indicate the candidate was successfully Updated.");
+        Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), "The success message does not indicate the candidate was successfully Updated.");
         Assert.assertEquals(updatedCandidateFirstName, newCandidateFirstName, "The candidate first name does not match the input.");
         Assert.assertEquals(updatedCandidateLastName, newCandidateLastName, "The candidate last name does not match the input.");
         Assert.assertEquals(updatedCandidateMobileNumber, MobileNumber, "The candidate mobile number does not match the input.");
-
-
     }
-    
 }
