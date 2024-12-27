@@ -9,50 +9,78 @@ on:
 jobs:
   run-api-tests:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up JDK
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Java environment
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
-      
+          distribution: 'temurin' # Use Eclipse Temurin (AdoptOpenJDK)
+          java-version: '17'      # Ensure compatibility with your project's SDK
+
+      # Start the backend service using Java SDK
+      - name: Start Backend Service
+        run: |
+          nohup java -jar libs/demo-0.0.1-SNAPSHOT.jar &
+
+      # Wait for the backend service to start
+      - name: Wait for backend
+        run: |
+          for i in {1..10}; do
+            nc -zv localhost 7081 && echo "Backend is up!" && break
+            echo "Waiting for backend..."
+            sleep 5
+          done
+
       # Run API Tests
       - name: Run API Tests
         run: |
           mkdir -p target/allure-results
-          mvn clean test -Dtest="*APITests" || echo "API tests failed but continuing"
+          mvn clean test -Dtest="*APITests"
 
       # Save Allure results as artifacts
       - name: Archive Allure Results
-        if: always() # Ensure this step runs even if tests fail
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: allure-results
+          name: allure-results-api
           path: target/allure-results
 
   run-ui-tests:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up JDK
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Java environment
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
           distribution: 'temurin'
-          cache: 'maven'
+          java-version: '17'
 
+      # Install Chrome and WebDriver for UI tests
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          google-chrome --version
+
+      # Run UI Tests
       - name: Run UI Tests
         run: |
           mkdir -p target/allure-results
-          mvn test -Dtest="**/*Test.java" -DfailIfNoTests=true || echo "UI tests failed but continuing"
+          mvn test -Dtest="**/*Test.java" -DfailIfNoTests=true
 
       # Save Allure results as artifacts
       - name: Archive Allure Results
-        if: always() # Ensure this step runs even if tests fail
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: allure-results-ui
@@ -61,11 +89,13 @@ jobs:
   generate-allure-report:
     runs-on: ubuntu-latest
     needs: [run-api-tests, run-ui-tests]
-    if: always()
-    
+    if: always() # Run even if previous jobs fail
+
     steps:
-      - uses: actions/checkout@v3
-      
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       # Download and set up Allure
       - name: Download Allure CommandLine
         run: |
@@ -78,7 +108,7 @@ jobs:
       - name: Download Allure API Results
         uses: actions/download-artifact@v3
         with:
-          name: allure-results
+          name: allure-results-api
           path: allure-results-api
 
       - name: Download Allure UI Results
