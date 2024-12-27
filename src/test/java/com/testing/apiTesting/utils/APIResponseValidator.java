@@ -82,6 +82,6 @@ public class APIResponseValidator {
     }
 
     public static void unauthorizedUpdate(Response response){
-        Assert.assertEquals(response.getStatusCode(), 401, "Expected 401 Unauthorized status code");
+        Assert.assertEquals(response.getStatusCode(), 403, "Expected 403 Unauthorized status code");
     }
 }
