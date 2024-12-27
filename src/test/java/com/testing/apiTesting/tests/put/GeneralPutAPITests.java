@@ -76,6 +76,8 @@ public class GeneralPutAPITests extends BaseAPITest {
        
     }
 
+    // method to supply invalid book data scenarios for testing.
+    // book objects with missing required fields (title, author, or both)
     @DataProvider(name = "invalidBookData")
     public Object[][] invalidBookDataProvider() {
         return new Object[][]{
@@ -93,18 +95,13 @@ public class GeneralPutAPITests extends BaseAPITest {
 
     @Test(description = "Verify updating a book with unauthorized access")
     public void testUpdateBookUnauthorizedAccess() {
-        
+        String userName = "user-1";
         int bookId = 1;
         Map<String, Object> bookData = new HashMap<>();
         bookData.put("title", "Unauthorized Update");
         bookData.put("author", "Unknown");
 
-        Response response = bookAPIClient.updateBook("", bookId, bookData);
+        Response response = bookAPIClient.updateBook(userName, bookId, bookData);
         APIResponseValidator.unauthorizedUpdate(response);
-       
     }
-
-    
-
-    
 }
