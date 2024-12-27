@@ -58,5 +58,4 @@ public class AddEmployeeTest extends BaseUITest{
         String displayedErrorMessage = addEmployeePage.getRequiredValidationErrorMessage();
         Assert.assertEquals(displayedErrorMessage, "Required", "Validation is not happening!");
     }
-
 }
