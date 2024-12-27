@@ -12,7 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <aspectj.version>1.9.19</aspectj.version>
-        <allure.version>2.21.0</allure.version>
+        <allure.version>2.14.0</allure.version> <!-- Updated Allure version -->
     </properties>
 
     <dependencies>
@@ -54,8 +54,14 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
-
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>allure</id>
+            <url>https://dl.bintray.com/qameta/maven</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -73,12 +79,23 @@
                     <argLine>-Xmx1024m</argLine>
                 </configuration>
             </plugin>
+
+            <!-- Allure Maven Plugin with updated version -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.12.0</version>
+                <version>${allure.version}</version>
+                <configuration>
+        <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
+    </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>serve</goal> <!-- Serve after cleaning -->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

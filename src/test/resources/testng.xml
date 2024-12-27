@@ -1,9 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="LibraryAPITestSuite">
-    <test name="Book API Tests">
-        <classes>
-            <class name="com.selenium.testing.apiTesting.tests.registerBookApiTest"/>
-        </classes>
+<suite name="Full Test Suite">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+    <test name="Combined Tests">
+        <packages>
+            <!-- UI Tests -->
+            <package name="com.testing.uiTesting.tests" />
+            <package name="com.testing.uiTesting.tests.PIM" />
+            <!-- API Tests -->
+            <package name="com.testing.apiTesting.tests.post" />
+            <package name="com.testing.apiTesting.tests.get" />
+            <package name="com.testing.apiTesting.tests.delete" />
+            <package name="com.testing.apiTesting.tests.put" />
+        </packages>
     </test>
 </suite>

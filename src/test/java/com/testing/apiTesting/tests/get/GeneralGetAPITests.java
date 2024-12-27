@@ -68,7 +68,7 @@ public class GeneralGetAPITests extends BaseAPITest {
     public void testGetBookById_WithInvalidId() {
         int invalidBookId = -5;
         Response response = bookAPIClient.getBookById(adminUser, invalidBookId);
-        APIResponseValidator.validateBadRequest(response); 
+        APIResponseValidator.validateInvalidId(response); 
     }
 }
 
