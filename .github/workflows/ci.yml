@@ -2,42 +2,23 @@ name: Run Tests and Generate Allure Reports
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  run-tests:
+  run-api-tests:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Set up Java environment
-      - name: Set up Java
+      - uses: actions/checkout@v3
+      
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # Use Eclipse Temurin (AdoptOpenJDK)
-          java-version: '17'      # Ensure compatibility with your project's SDK
-
-      # Start the backend service using Java SDK
-      - name: Start Backend Service
-        run: |
-          nohup java -jar libs/demo-0.0.1-SNAPSHOT.jar &
-
-      # Wait for the backend service to start
-      - name: Wait for backend
-        run: |
-          for i in {1..10}; do
-            nc -zv localhost 7081 && echo "Backend is up!" && break
-            echo "Waiting for backend..."
-            sleep 5
-          done
-
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+      
       # Run API Tests
       - name: Run API Tests
         run: |
@@ -52,27 +33,16 @@ jobs:
 
   run-ui-tests:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Set up Java environment
-      - name: Set up Java
+      - uses: actions/checkout@v3
+      
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
 
-      # Install Chrome and WebDriver for UI tests
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          google-chrome --version
-
-      # Run UI Tests
       - name: Run UI Tests
         run: |
           mvn test -Dtest="**/*Test.java" -DfailIfNoTests=true
@@ -86,19 +56,18 @@ jobs:
 
   generate-allure-report:
     runs-on: ubuntu-latest
-    needs: [run-tests, run-ui-tests]
-    if: always() # Run even if previous jobs fail
-
+    needs: [run-api-tests, run-ui-tests]
+    if: always()
+    
     steps:
-      # Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Install Allure CLI
-      - name: Install Allure CLI
+      - uses: actions/checkout@v3
+      
+      # Download and set up Allure
+      - name: Download Allure CommandLine
         run: |
-          sudo apt-get update
-          sudo apt-get install -y allure
+          wget https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
+          sudo tar -zxvf allure-2.24.1.tgz -C /opt/
+          sudo ln -s /opt/allure-2.24.1/bin/allure /usr/bin/allure
           allure --version
 
       # Download Allure results artifacts
@@ -114,10 +83,17 @@ jobs:
           name: allure-results-ui
           path: allure-results-ui
 
+      # Generate environment.properties
+      - name: Generate Environment Properties
+        run: |
+          mkdir -p combined-allure-results
+          echo "Browser=Chrome" > combined-allure-results/environment.properties
+          echo "Browser.Version=latest" >> combined-allure-results/environment.properties
+          echo "Environment=QA" >> combined-allure-results/environment.properties
+
       # Merge and Generate Allure report
       - name: Generate Allure Report
         run: |
-          mkdir -p combined-allure-results
           cp -R allure-results-api/* combined-allure-results/
           cp -R allure-results-ui/* combined-allure-results/
           allure generate combined-allure-results --clean -o allure-report
@@ -128,3 +104,4 @@ jobs:
         with:
           name: allure-report
           path: allure-report
+          retention-days: 30
