@@ -73,4 +73,15 @@ public class APIResponseValidator {
     public static void invalidBookUpdate(Response response) {
         Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for invalid book update");
     }
+    public static void notExistBookUpdate(Response response) {
+        Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for non-existent book update");
+    }
+    
+    public static void bookValidation(Response response){
+        Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for invalid input");
+    }
+
+    public static void unauthorizedUpdate(Response response){
+        Assert.assertEquals(response.getStatusCode(), 403, "Expected 403 Unauthorized status code");
+    }
 }

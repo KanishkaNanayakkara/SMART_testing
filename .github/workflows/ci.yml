@@ -1,15 +1,13 @@
-name: Run Tests and Generate Allure Reports
+name: Run Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  run-tests:
+  run-api-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -41,13 +39,15 @@ jobs:
       # Run API Tests
       - name: Run API Tests
         run: |
+          mkdir -p target/allure-results
           mvn clean test -Dtest="*APITests"
 
       # Save Allure results as artifacts
       - name: Archive Allure Results
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: allure-results
+          name: allure-results-api
           path: target/allure-results
 
   run-ui-tests:
@@ -75,10 +75,12 @@ jobs:
       # Run UI Tests
       - name: Run UI Tests
         run: |
+          mkdir -p target/allure-results
           mvn test -Dtest="**/*Test.java" -DfailIfNoTests=true
 
       # Save Allure results as artifacts
       - name: Archive Allure Results
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: allure-results-ui
@@ -86,7 +88,7 @@ jobs:
 
   generate-allure-report:
     runs-on: ubuntu-latest
-    needs: [run-tests, run-ui-tests]
+    needs: [run-api-tests, run-ui-tests]
     if: always() # Run even if previous jobs fail
 
     steps:
@@ -94,18 +96,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Install Allure CLI
-      - name: Install Allure CLI
+      # Download and set up Allure
+      - name: Download Allure CommandLine
         run: |
-          sudo apt-get update
-          sudo apt-get install -y allure
+          wget https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
+          sudo tar -zxvf allure-2.24.1.tgz -C /opt/
+          sudo ln -s /opt/allure-2.24.1/bin/allure /usr/bin/allure
           allure --version
 
       # Download Allure results artifacts
       - name: Download Allure API Results
         uses: actions/download-artifact@v3
         with:
-          name: allure-results
+          name: allure-results-api
           path: allure-results-api
 
       - name: Download Allure UI Results
@@ -114,10 +117,17 @@ jobs:
           name: allure-results-ui
           path: allure-results-ui
 
+      # Generate environment.properties
+      - name: Generate Environment Properties
+        run: |
+          mkdir -p combined-allure-results
+          echo "Browser=Chrome" > combined-allure-results/environment.properties
+          echo "Browser.Version=latest" >> combined-allure-results/environment.properties
+          echo "Environment=QA" >> combined-allure-results/environment.properties
+
       # Merge and Generate Allure report
       - name: Generate Allure Report
         run: |
-          mkdir -p combined-allure-results
           cp -R allure-results-api/* combined-allure-results/
           cp -R allure-results-ui/* combined-allure-results/
           allure generate combined-allure-results --clean -o allure-report
@@ -128,3 +138,4 @@ jobs:
         with:
           name: allure-report
           path: allure-report
+          retention-days: 30

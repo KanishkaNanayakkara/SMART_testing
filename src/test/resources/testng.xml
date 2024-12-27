@@ -13,5 +13,6 @@
             <package name="com.testing.apiTesting.tests.delete" />
             <package name="com.testing.apiTesting.tests.put" />
         </packages>
+        <parameter name="listener" value="io.qameta.allure.testng.AllureTestNg" />
     </test>
 </suite>
