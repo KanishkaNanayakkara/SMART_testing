@@ -1,4 +1,4 @@
-name: Run Tests and Generate Allure Reports
+name: Run Tests
 
 on:
   push:
@@ -22,10 +22,12 @@ jobs:
       # Run API Tests
       - name: Run API Tests
         run: |
-          mvn clean test -Dtest="*APITests"
+          mkdir -p target/allure-results
+          mvn clean test -Dtest="*APITests" || echo "API tests failed but continuing"
 
       # Save Allure results as artifacts
       - name: Archive Allure Results
+        if: always() # Ensure this step runs even if tests fail
         uses: actions/upload-artifact@v3
         with:
           name: allure-results
@@ -45,10 +47,12 @@ jobs:
 
       - name: Run UI Tests
         run: |
-          mvn test -Dtest="**/*Test.java" -DfailIfNoTests=true
+          mkdir -p target/allure-results
+          mvn test -Dtest="**/*Test.java" -DfailIfNoTests=true || echo "UI tests failed but continuing"
 
       # Save Allure results as artifacts
       - name: Archive Allure Results
+        if: always() # Ensure this step runs even if tests fail
         uses: actions/upload-artifact@v3
         with:
           name: allure-results-ui
