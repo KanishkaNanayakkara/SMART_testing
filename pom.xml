@@ -56,13 +56,6 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>allure</id>
-            <url>https://dl.bintray.com/qameta/maven</url>
-        </repository>
-    </repositories>
-
     <build>
         <plugins>
             <plugin>
@@ -77,6 +70,9 @@
                     </includes>
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>-Xmx1024m</argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
@@ -86,12 +82,13 @@
                 <artifactId>allure-maven</artifactId>
                 <version>${allure.version}</version>
                 <configuration>
-        <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
-    </configuration>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                </configuration>
                 <executions>
                     <execution>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>serve</goal> <!-- Serve after cleaning -->
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>

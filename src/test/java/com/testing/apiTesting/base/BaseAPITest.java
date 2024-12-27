@@ -16,6 +16,7 @@ public class BaseAPITest {
 
     @BeforeSuite
     public void setup() {
+        System.setProperty("allure.results.directory", "target/allure-results");
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 7081;
     }
