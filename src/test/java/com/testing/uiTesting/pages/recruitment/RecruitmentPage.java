@@ -12,7 +12,7 @@ public class RecruitmentPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//body/div[@id='app']/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/button[1]" )
+    @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--secondary']" )
     private WebElement btn_add;
 
     @FindBy(xpath = "//input[@placeholder='First Name']" )
