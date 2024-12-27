@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests and Generate Allure Reports
 
 on:
   push:
@@ -41,7 +41,14 @@ jobs:
       # Run API Tests
       - name: Run API Tests
         run: |
-          mvn test -Dtest="*APITests"
+          mvn clean test -Dtest="*APITests"
+
+      # Save Allure results as artifacts
+      - name: Archive Allure Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path: target/allure-results
 
   run-ui-tests:
     runs-on: ubuntu-latest
@@ -69,3 +76,54 @@ jobs:
       - name: Run UI Tests
         run: |
           mvn test -Dtest="**/*Test.java" -DfailIfNoTests=true
+
+      # Save Allure results as artifacts
+      - name: Archive Allure Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results-ui
+          path: target/allure-results
+
+  generate-allure-report:
+    runs-on: ubuntu-latest
+    needs: [run-tests, run-ui-tests]
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Install Allure CLI
+      - name: Install Allure CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y allure
+          allure --version
+
+      # Download Allure results artifacts
+      - name: Download Allure API Results
+        uses: actions/download-artifact@v3
+        with:
+          name: allure-results
+          path: allure-results-api
+
+      - name: Download Allure UI Results
+        uses: actions/download-artifact@v3
+        with:
+          name: allure-results-ui
+          path: allure-results-ui
+
+      # Merge and Generate Allure report
+      - name: Generate Allure Report
+        run: |
+          mkdir -p combined-allure-results
+          cp -R allure-results-api/* combined-allure-results/
+          cp -R allure-results-ui/* combined-allure-results/
+          allure generate combined-allure-results --clean -o allure-report
+
+      # Upload Allure report as an artifact
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report
