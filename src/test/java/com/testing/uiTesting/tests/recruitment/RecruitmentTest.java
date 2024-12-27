@@ -76,7 +76,7 @@ public class RecruitmentTest extends BaseUITest {
         recruitmentPage.typeLastName(newCandidateLastName);
         recruitmentPage.typeContact(MobileNumber);
         recruitmentPage.clickSave();
-
+        
         String Message = recruitmentPage.getSuccessMessage();
         String updatedCandidateFirstName = recruitmentPage.getCreatedCandidateFirstName();
         String updatedCandidateLastName = recruitmentPage.getCreatedCandidateLastName();

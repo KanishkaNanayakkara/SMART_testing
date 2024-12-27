@@ -34,24 +34,19 @@ public class SideBarNavigationPanelPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
     public void clickMyInfo() {
         myInfo.click();
     }
-
     public void clickLeaveMenu() {
         leaveMenuOption.click();
     }
-
     public void clickMenuOption(WebElement menuOption) {
         menuOption.click();
     }
-
     @SuppressWarnings("deprecation")
     public boolean isLeaveMenuActive() {
         return myInfo.getAttribute("class").contains("active");
     }
-
     public void clickPIM() {
         btn_pim.click();
     }
@@ -59,7 +54,6 @@ public class SideBarNavigationPanelPage {
         userProfileMenu.click();
         profileMenu.click();
     }
-    
     public void clickRecruitment() {
         recruitment.click();
     }

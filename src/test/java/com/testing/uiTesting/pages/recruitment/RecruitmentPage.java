@@ -18,8 +18,7 @@ public class RecruitmentPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
-
+    
     @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--secondary']" )
     private WebElement btn_add;
 
