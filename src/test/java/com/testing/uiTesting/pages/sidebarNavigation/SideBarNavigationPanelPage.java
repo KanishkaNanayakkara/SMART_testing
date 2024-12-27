@@ -14,11 +14,21 @@ public class SideBarNavigationPanelPage {
 
     @FindBy(xpath = "//span[normalize-space()='Admin']")
     private WebElement btn_search;
+
     @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='PIM']")
     private WebElement btn_pim;
 
     @FindBy(xpath = "//span[normalize-space()='Leave']")
     private WebElement leaveMenuOption;
+
+    @FindBy(xpath = "//span[normalize-space()='Recruitment']")
+    private WebElement recruitment;
+
+    @FindBy(xpath = "//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']")
+    private WebElement userProfileMenu;
+
+    @FindBy(xpath = "//a[normalize-space()='Change Password']")
+    private WebElement profileMenu;
 
     public SideBarNavigationPanelPage(WebDriver driver) {
         this.driver = driver;
@@ -45,16 +55,13 @@ public class SideBarNavigationPanelPage {
     public void clickPIM() {
         btn_pim.click();
     }
-
-    @FindBy(xpath = "//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']")
-    private WebElement userProfileMenu;
-
-    @FindBy(xpath = "//a[normalize-space()='Change Password']")
-    private WebElement profileMenu;
-
     public void navigateToProfileSettings() {
         userProfileMenu.click();
         profileMenu.click();
+    }
+    
+    public void clickRecruitment() {
+        recruitment.click();
     }
 
 }
