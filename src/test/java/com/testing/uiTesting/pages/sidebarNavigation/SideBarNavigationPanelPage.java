@@ -1,4 +1,4 @@
-package com.testing.uiTesting.pages;
+package com.testing.uiTesting.pages.sidebarNavigation;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
