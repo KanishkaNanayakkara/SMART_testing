@@ -12,13 +12,13 @@ public class PerformancePage {
     
     private WebDriver driver;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[1]/header/div[2]/nav/ul/li[3]" )
+    @FindBy(xpath = "//a[normalize-space()='My Trackers']" )
     private WebElement my_trackers_select;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div/div/div[4]/div/button" )
+    @FindBy(xpath = "//button[@name='view']" )
     private WebElement btn_view;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button" )
+    @FindBy(xpath = "//button[normalize-space()='Add Log']" )
     private WebElement btn_addLog;
 
     @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[3]/div/div/div/form/div[1]/div/div[2]/input" )
@@ -27,19 +27,19 @@ public class PerformancePage {
     @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[3]/div/div/div/form/div[3]/div/div[2]/textarea" )
     private WebElement txt_comment;
     
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[3]/div/div/div/form/div[4]/button[2]" )
+    @FindBy(xpath = "//button[normalize-space()='Save']" )
     private WebElement save_btn;
 
     @FindBy(xpath = "//div[@class='oxd-toast oxd-toast--success oxd-toast-container--toast']" )
     private WebElement successMessage;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[2]/div[1]/div/div[2]/div[2]/div[1]/li/button" )
+    @FindBy(xpath = "//i[@class='oxd-icon bi-three-dots-vertical']" )
     private WebElement options_btn;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[2]/div[1]/div/div[2]/div[2]/div[1]/li/ul/li[1]/p" )
+    @FindBy(xpath = "//p[normalize-space()='Edit']" )
     private WebElement edit_btn;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[3]/div/div/div/form/div[2]/div/button[2]" )
+    @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--text orangehrm-tracker-rating-button --deselected']" )
     private WebElement negative_feedback;
 
     public PerformancePage(WebDriver driver) {
@@ -65,6 +65,14 @@ public class PerformancePage {
 
     public  String getSuccessMessage() {
         return successMessage.getText();
+    }
+
+    public String getCreatedLogName(){
+        return txt_log_name.getDomProperty("value");
+    }
+
+    public String getCreatedLogComment(){
+        return txt_comment.getDomProperty("value");
     }
 
     public void typeLogName(String name) {

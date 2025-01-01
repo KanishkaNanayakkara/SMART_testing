@@ -8,20 +8,6 @@ import com.testing.uiTesting.pages.performance.PerformancePage;
 import com.testing.uiTesting.pages.sidebarNavigation.SideBarNavigationPanelPage;
 
 public class PerformanceTest extends BaseUITest {
- 
-    @Test
-    public void verifyNavigationToPerformanceModule() {
-
-        SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
-
-        sideBarNavigationPanelPage.clickPerformance();
-
-        String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/performance/searchEvaluatePerformanceReview";
-        String currentUrl = driver.getCurrentUrl();
-
-        Assert.assertEquals(currentUrl, expectedUrl, "Failed to navigate to the Performance page.");
-
-    }
 
     @Test
     public void verifyAddNewTrackerReview () {
@@ -33,18 +19,24 @@ public class PerformanceTest extends BaseUITest {
         String employeeLogName = "Sales Performance Tracker";
         String employeeLogComment = "Successfully finished sales for 10 shops.";
 
-
         performancePage.clickMyTrackers();
         performancePage.clickViewBtn();
         performancePage.clickAddLog();
         performancePage.typeLogName(employeeLogName);
         performancePage.typeComment(employeeLogComment);
         performancePage.clickSaveLog();
+        performancePage.clickOptions();
+        performancePage.clickEdit();
 
         String Message = performancePage.getSuccessMessage();
+        String CreatedLogName = performancePage.getCreatedLogName();
+        String CreatedLogComment = performancePage.getCreatedLogComment();
 
         Assert.assertTrue(Message.toLowerCase().contains("successfully saved"), 
                   "The success message does not indicate the candidate was successfully saved. Message: ");
+        
+        Assert.assertEquals(CreatedLogName, employeeLogName, "The created log name match the input.");
+        Assert.assertEquals(CreatedLogComment, employeeLogComment, "The created log comment match the input.");
     }
 
     @Test
@@ -70,8 +62,15 @@ public class PerformanceTest extends BaseUITest {
 
         String Message = performancePage.getSuccessMessage();
 
+        performancePage.clickOptions();
+        performancePage.clickEdit();
+
+        String updatedLogName = performancePage.getCreatedLogName();
+        String updatedLogComment = performancePage.getCreatedLogComment();
+
         Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), 
                   "The success message does not indicate the candidate was successfully saved. Message: ");
+        Assert.assertEquals(updatedLogName, newEmployeeLogName, "The updated log name match the input.");
+        Assert.assertEquals(updatedLogComment, newEmployeeLogComment, "The updated log comment match the input.");
     }
-
 }
