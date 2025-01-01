@@ -37,7 +37,6 @@ public class GeneralGetAPITests extends BaseAPITest {
     public void testGetBookByIdasAdminUser_ValidScenario() {
         // Create book before get
         Response createdResponse = testUtils.createTestBook(bookAPIClient,adminUser);
-        System.out.println(createdResponse.getBody().asString());
 
         int validBookId = createdResponse.jsonPath().getInt("id");
 
