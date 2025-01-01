@@ -20,6 +20,7 @@ public class BookDataFactory {
     public static Map<String, Object> createBookWithMissingAuthor(String title) {
         Map<String, Object> bookData = new HashMap<>();
         bookData.put("title", title);
+        bookData.put("author", null);
         return bookData;
     }
     public static Map<String, Object> createBookWithMissingTitleAndAuthor() {
