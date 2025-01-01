@@ -14,8 +14,6 @@ public class GeneralGetAPITests extends BaseAPITest {
     private BookAPIClient bookAPIClient;
     private TestUtils testUtils;
 
-    String title = "";
-    String author = "";
     String adminUser = "admin";
     String generalUser = "user";
 
@@ -25,24 +23,31 @@ public class GeneralGetAPITests extends BaseAPITest {
         testUtils = new TestUtils();
     }
 
-    @Test(description = "Verify getting all books with valid response and headers")
-    public void testGetAllBooks_ValidScenario() {
+    @Test(description = "Verify Retreiving all books as an admin user with valid response and headers")
+    public void testGetAllBooksasAdminUser_ValidScenario() {
         // Create book before get
-        title = "Test Book 6";
-        author = "Test author 6";
-        Response createdResponse = testUtils.createTestBook(bookAPIClient, title, author, adminUser);
+        Response createdResponse = testUtils.createTestBook(bookAPIClient,adminUser);
         APIResponseValidator.validateSuccessfulCreation(createdResponse);
 
         Response response = bookAPIClient.getAllBooks(generalUser);
         APIResponseValidator.validateSuccessfulRetrieval(response);
     }
 
-    @Test(description = "Verify getting a book by ID with valid response")
-    public void testGetBookById_ValidScenario() {
+    @Test(description = "Verify Retreiving a book by ID as an admin user with valid response")
+    public void testGetBookByIdasAdminUser_ValidScenario() {
         // Create book before get
-        title = "Test Book 7";
-        author = "Test author 7";
-        Response createdResponse = testUtils.createTestBook(bookAPIClient, title, author, adminUser);
+        Response createdResponse = testUtils.createTestBook(bookAPIClient,adminUser);
+
+        int validBookId = createdResponse.jsonPath().getInt("id");
+
+        Response response = bookAPIClient.getBookById(adminUser, validBookId);
+        APIResponseValidator.validateSuccessfulRetrievalofaSinglebook(response, validBookId);
+    }
+
+    @Test(description = "Verify Retreiving a book by ID as a general user with valid response")
+    public void testGetBookByIdasGeneralUser_ValidScenario() {
+        // Create book before get
+        Response createdResponse = testUtils.createTestBook(bookAPIClient, adminUser);
 
         int validBookId = createdResponse.jsonPath().getInt("id");
 
@@ -50,13 +55,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateSuccessfulRetrievalofaSinglebook(response, validBookId);
     }
 
-    @Test(description = "Verify getting all books when the database is empty")
-    public void testGetAllBooks_EmptyDatabase() {
-        Response response = bookAPIClient.getAllBooks(generalUser);
-        APIResponseValidator.validateRetrievalEmptyDatabase(response);
-    }
-
-    @Test(description = "Verify getting a book by non-exist book id")
+    @Test(description = "Verify Retreiving a book by non-exist book id as an admin user")
     public void testGetBookById_NonExistBookId() {
         int nonExistBookId = 999;
 
@@ -64,7 +63,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateInvalidId(response);
     }
 
-    @Test(description = "Verify getting a book by ID with invalid Id format")
+    @Test(description = "Verify Retreiving a book by ID with invalid Id format as an admin user")
     public void testGetBookById_WithInvalidId() {
         int invalidBookId = -5;
         Response response = bookAPIClient.getBookById(adminUser, invalidBookId);

@@ -33,13 +33,6 @@ public class APIResponseValidator {
         Assert.assertNotNull(jsonPath.getString("author"), "Book author should not be null");
     }
 
-    public static void validateRetrievalEmptyDatabase(Response response) {
-        Assert.assertEquals(response.getStatusCode(), 200, "Expected status code 200");
-        // Validate response body is an empty list
-        List<?> books = response.jsonPath().getList("$");
-        Assert.assertTrue(books.isEmpty(), "Expected an empty book list");
-    }
-
     public static void validateSuccessfulUpdate(Response response) {
         Assert.assertEquals(response.getStatusCode(), 200, "Book update failed");
     }

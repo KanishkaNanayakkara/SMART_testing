@@ -30,7 +30,7 @@ public class GeneralPutAPITests extends BaseAPITest {
     @Test(description = "Verify updating a book with invalid data")
     public void testInvalidBookUpdate() {
 
-        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "Test Book 8", "Test Author 8", username);
+        Response createValiedBook = testUtils.createTestBook(bookAPIClient, username);
 
         Integer createdBookId = createValiedBook.jsonPath().getInt("id");
         
@@ -47,7 +47,7 @@ public class GeneralPutAPITests extends BaseAPITest {
     @Test(description = "Verify updating a book with valid data")
     public void testValidBookUpdate() {
 
-        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "Test Book 9", "Test Author 9", username);
+        Response createValiedBook = testUtils.createTestBook(bookAPIClient, username);
         
         Integer createdBookId = createValiedBook.jsonPath().getInt("id");
 
@@ -88,7 +88,7 @@ public class GeneralPutAPITests extends BaseAPITest {
     }
     
     @Test(dataProvider = "invalidBookData", description = "Verify updating a book with invalid data")
-    public void testInputValidation(int bookId, Map<String, Object> bookData, String expectedErrorMessage) {
+    public void testUpdateBookwithInvalidData(int bookId, Map<String, Object> bookData, String expectedErrorMessage) {
         Response response = bookAPIClient.updateBook(username, bookId, bookData);
         APIResponseValidator.bookValidation(response);
     }
@@ -97,11 +97,13 @@ public class GeneralPutAPITests extends BaseAPITest {
     public void testUpdateBookUnauthorizedAccess() {
         String testUser = "user";
 
-        Response createValiedBook = testUtils.createTestBook(bookAPIClient, "Test Book 10", "Test Author 10", username);
+        Response createValiedBook = testUtils.createTestBook(bookAPIClient, username);
         Integer createdBookId = createValiedBook.jsonPath().getInt("id");
+        String createdBookTitle = createValiedBook.jsonPath().getString("title");
+        String createdBookAuthor = createValiedBook.jsonPath().getString("author");
         Map<String, Object> bookData = new HashMap<>();
-        bookData.put("title", "Updated Test Book 10");
-        bookData.put("author", "Updated Test Author 10");
+        bookData.put("title", "Updated Test Book - " + createdBookTitle);
+        bookData.put("author", "Updated Test Author - " + createdBookAuthor);
 
         Response response = bookAPIClient.updateBook(testUser, createdBookId, bookData);
         APIResponseValidator.unauthorizedUpdate(response);

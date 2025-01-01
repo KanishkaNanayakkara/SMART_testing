@@ -1,12 +1,15 @@
+
+---
+
 # QA Testing Project
 
 ## Project Description  
-This project provides comprehensive API and UI testing functionalities .  
-The API tests validate the functionality of given endpoints of the library management system including handle book registration, retrieval, updating, and deletion. These tests also aim to uncover hidden bugs in the system.  
-The UI tests focus on a demo application, [SauceDemo](https://www.saucedemo.com/), specifically designed for testing and learning purposes.  
+This project provides comprehensive API and UI testing functionalities.  
+The API tests validate the functionality of given endpoints of the library management system, including handling book registration, retrieval, updating, and deletion. These tests also aim to uncover hidden bugs in the system.  
+The UI tests focus on a demo application, (https://opensource-demo.orangehrmlive.com/), specifically designed for testing and learning purposes.
 
-## endpoints to be tested under API testing(library management system )  
-https://drive.google.com/file/d/1Rx9NPHZpqzRVazSVbaZIX-0DJM9UPWR9/view?usp=sharing
+## Endpoints to be Tested Under API Testing (Library Management System)  
+The Jar file of the application is added to the "lib" folder of the project.
 
 ## Prerequisites  
 
@@ -53,8 +56,8 @@ qa-testing/
 
 #### Setting Up the API Server  
 1. Ensure Java is installed (version 13 or higher).  
-2. Navigate to the directory containing the `demo-0.0.1-SNAPSHOT.jar` file.  
-3. Start the API server by running the following command:  
+2. Navigate to the directory containing the `demo-0.0.1-SNAPSHOT.jar` file (inside LIB folder).  
+3. Start the API server by running the following command in an integrated terminal:  
 
    ```sh
    java -jar demo-0.0.1-SNAPSHOT.jar
@@ -90,6 +93,44 @@ qa-testing/
 
 3. UI test results will be displayed in the terminal.  
 
+---
+
+## Steps to Generate and Save the HTML Report  
+
+### Run the Allure Report Generation Command  
+
+To generate a temporary report view in your default browser, run the following command:  
+
+```bash  
+mvn allure:serve  
+```  
+
+This will start a local server and display the HTML report.  
+
+### Generate and Save a Standalone Report  
+
+To create a static HTML report that you can submit:  
+
+```bash  
+mvn allure:report  
+```  
+
+This will generate the HTML files in the `target/site/allure-maven-plugin` directory.  
+
+### Locate the Generated Report  
+
+Navigate to the `target/site/allure-maven-plugin` directory.  
+
+Inside, you will find a collection of HTML files and assets for the report.  
+
+### Submit the Report  
+
+You can submit the report by either:  
+1. Zipping the `target/site/allure-maven-plugin` directory.  
+2. Opening the `index.html` file in a browser and saving it as a PDF for submission.  
+
+---
+
 ## Notes  
 - **Data Persistence:** The API server uses an in-memory database. Data will persist only while the server is running. Upon restarting, all data is cleared.  
 - **User Credentials:**  
@@ -97,18 +138,4 @@ qa-testing/
   - User: `username: user`, `password: password`  
 - Ensure the terminal running the API server remains open during testing.  
 
----
-
-## Branch Naming Convension  
-1. Feature - ft , Chore- ch or Bug- bg
-/
-2. Initials of dev
--
-3. branch name
-ex:ch/kn-add-read-me-file
-   ft/ws-login-ui-test
-   bg/kn-fix-login-test-failure 
-
-
-
-This README provides a clear guide to set up, understand, and run the project effectively.
+---  
