@@ -5,8 +5,11 @@
     <test name="Combined Tests">
         <packages>
             <!-- UI Tests -->
-            <package name="com.testing.uiTesting.tests" />
-            <package name="com.testing.uiTesting.tests.PIM" />
+            <package name="com.testing.uiTesting.tests.pim" />
+            <package name="com.testing.uiTesting.tests.dashboard" />
+            <package name="com.testing.uiTesting.tests.leave" />
+            <package name="com.testing.uiTesting.tests.myInfo" />
+            <package name="com.testing.uiTesting.tests.recruitment" />
             <!-- API Tests -->
             <package name="com.testing.apiTesting.tests.post" />
             <package name="com.testing.apiTesting.tests.get" />

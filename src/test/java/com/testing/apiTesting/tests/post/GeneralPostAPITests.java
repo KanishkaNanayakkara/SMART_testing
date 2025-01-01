@@ -75,14 +75,16 @@ public class GeneralPostAPITests extends BaseAPITest {
     @Test(description = "Verify duplicate book id handling")
     public void testDuplicateBookIdHandling() {
 
-        Response createdBook = testUtils.createTestBook(bookAPIClient, "Test Book 10", "Test Author 10", adminUser);
+        Response createdBook = testUtils.createTestBook(bookAPIClient, adminUser);
 
         int bookId = createdBook.jsonPath().getInt("id");
+        String createdBookTitle = createdBook.jsonPath().getString("title");
+        String createdBookAuthor = createdBook.jsonPath().getString("author");
 
         Response duplicateResponse = bookAPIClient.createBook(adminUser, Map.of(
             "id", bookId,
-            "title", "Test Book 10",
-            "author", "Test Author 10"
+            "title", createdBookTitle,
+            "author", createdBookAuthor
         ));
 
         APIResponseValidator.validateDuplicateCreation(duplicateResponse);
