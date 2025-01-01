@@ -139,3 +139,28 @@ jobs:
           name: allure-report
           path: allure-report
           retention-days: 30
+  
+  deploy-report:
+    runs-on: ubuntu-latest
+    needs: generate-allure-report
+    if: always()
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Download the generated report
+      - name: Download Allure Report
+        uses: actions/download-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
