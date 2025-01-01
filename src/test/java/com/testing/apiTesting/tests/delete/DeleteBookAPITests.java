@@ -14,8 +14,6 @@ public class DeleteBookAPITests extends BaseAPITest {
     private BookAPIClient bookAPIClient;
     private TestUtils testUtils;
 
-    String title = "";
-    String author = "";
     String adminUser = "admin";
     String generalUser = "user";
 
@@ -28,9 +26,7 @@ public class DeleteBookAPITests extends BaseAPITest {
     @Test(description = "Verify successful deletion of a book by ID")
     public void testDeleteBook_SuccessScenario() {
         // Create book before delete
-        title = "Test Book 8";
-        author = "Test author 8";
-        Response response = testUtils.createTestBook(bookAPIClient, title, author, adminUser);
+        Response response = testUtils.createTestBook(bookAPIClient, adminUser);
 
         int bookId = response.jsonPath().getInt("id");
 
@@ -42,9 +38,7 @@ public class DeleteBookAPITests extends BaseAPITest {
     @Test(description = "Verify unauthorized access is prevented when deleting a book")
     public void testDeleteBook_UnauthorizedAccess() {
         // Create book before delete
-        title = "Test Book 5";
-        author = "Test author 5";
-        Response response = testUtils.createTestBook(bookAPIClient, title, author, adminUser);
+        Response response = testUtils.createTestBook(bookAPIClient, adminUser);
 
         int bookId = response.jsonPath().getInt("id");
 
