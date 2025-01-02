@@ -90,4 +90,24 @@ public class GeneralPostAPITests extends BaseAPITest {
 
         APIResponseValidator.validateDuplicateCreation(duplicateResponse);
     }
+
+    @Test(description = "Verify case sensitivity in duplicate book handling")
+public void testCaseSensitivityInDuplicateBookHandling() {
+
+    String originalTitle = "Unique Title " + uniqueIdentifier;
+    String originalAuthor = "Original Author " + uniqueIdentifier;
+
+    Map<String, Object> originalBookData = BookDataFactory.createValidBook(originalTitle, originalAuthor);
+    Response createdBook = bookAPIClient.createBook(adminUser, originalBookData);
+    APIResponseValidator.validateSuccessfulCreation(createdBook);
+
+    String duplicateTitle = originalTitle.toUpperCase();
+    String duplicateAuthor = originalAuthor.toLowerCase();
+
+    Map<String, Object> duplicateBookData = BookDataFactory.createValidBook(duplicateTitle, duplicateAuthor);
+    Response duplicateResponse = bookAPIClient.createBook(adminUser, duplicateBookData);
+
+    APIResponseValidator.validateDuplicateCreation(duplicateResponse);
+}
+
 }

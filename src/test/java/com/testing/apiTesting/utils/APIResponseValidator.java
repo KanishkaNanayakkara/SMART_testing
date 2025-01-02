@@ -57,6 +57,8 @@ public class APIResponseValidator {
             Assert.assertEquals(statusCode, 409, "Expected 409 Conflict for duplicate book ID");
         } else if (statusCode == 208) {
             Assert.assertEquals(statusCode, 208, "Expected 208 Already Reported for duplicate book ID");
+        } else {
+            Assert.fail("Unexpected status code: " + statusCode + ". Expected 409 or 208 for duplicate book handling.");
         }
     }
     public static void updateBookTest(Response response) {
