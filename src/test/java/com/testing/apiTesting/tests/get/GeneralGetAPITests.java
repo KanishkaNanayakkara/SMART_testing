@@ -23,7 +23,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         testUtils = new TestUtils();
     }
 
-    @Test(description = "Verify Retreiving all books as an admin user with valid response and headers")
+    @Test(description = "Verify Retrieving all books as an admin user with valid response and headers")
     public void testGetAllBooksasAdminUser_ValidScenario() {
         // Create book before get
         Response createdResponse = testUtils.createTestBook(bookAPIClient,adminUser);
@@ -33,7 +33,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateSuccessfulRetrieval(response);
     }
 
-    @Test(description = "Verify Retreiving a book by ID as an admin user with valid response")
+    @Test(description = "Verify Retrieving a book by ID as an admin user with valid response")
     public void testGetBookByIdasAdminUser_ValidScenario() {
         // Create book before get
         Response createdResponse = testUtils.createTestBook(bookAPIClient,adminUser);
@@ -44,7 +44,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateSuccessfulRetrievalofaSinglebook(response, validBookId);
     }
 
-    @Test(description = "Verify Retreiving a book by ID as a general user with valid response")
+    @Test(description = "Verify Retrieving a book by ID as a general user with valid response")
     public void testGetBookByIdasGeneralUser_ValidScenario() {
         // Create book before get
         Response createdResponse = testUtils.createTestBook(bookAPIClient, adminUser);
@@ -55,7 +55,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateSuccessfulRetrievalofaSinglebook(response, validBookId);
     }
 
-    @Test(description = "Verify Retreiving a book by non-exist book id as an admin user")
+    @Test(description = "Verify Retrieving a book by non-exist book id as an admin user")
     public void testGetBookById_NonExistBookId() {
         int nonExistBookId = 999;
 
@@ -63,7 +63,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateInvalidId(response);
     }
 
-    @Test(description = "Verify Retreiving a book by ID with invalid Id format as an admin user")
+    @Test(description = "Verify Retrieving a book by ID with invalid Id format as an admin user")
     public void testGetBookById_WithInvalidId() {
         int invalidBookId = -5;
         Response response = bookAPIClient.getBookById(adminUser, invalidBookId);

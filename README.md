@@ -139,3 +139,6 @@ You can submit the report by either:
 - Ensure the terminal running the API server remains open during testing.  
 
 ---  
+### Link for the Allure Report  
+
+To see the allure report:  https://wenurasubhasinghe.github.io/IT-QA-Assignment/
