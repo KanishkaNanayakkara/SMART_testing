@@ -39,6 +39,9 @@ public class PerformancePage {
     @FindBy(xpath = "//p[normalize-space()='Edit']" )
     private WebElement edit_btn;
 
+    @FindBy(xpath = "//button[normalize-space()='Cancel']" )
+    private WebElement close_btn;
+
     @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--text orangehrm-tracker-rating-button --deselected']" )
     private WebElement negative_feedback;
 
@@ -109,5 +112,9 @@ public class PerformancePage {
 
     public void clickNegativeFeedback(){
         negative_feedback.click();
+    }
+
+    public void clickClose(){
+        close_btn.click();
     }
 }

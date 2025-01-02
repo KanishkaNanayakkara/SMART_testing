@@ -32,8 +32,9 @@ public class PerformanceTest extends BaseUITest {
         String CreatedLogName = performancePage.getCreatedLogName();
         String CreatedLogComment = performancePage.getCreatedLogComment();
 
-        Assert.assertTrue(Message.toLowerCase().contains("successfully saved"), 
-                  "The success message does not indicate the candidate was successfully saved. Message: ");
+        performancePage.clickClose();
+
+        Assert.assertTrue(Message.toLowerCase().contains("successfully saved"), "The success message does not indicate the candidate was successfully saved. Message: ");
         
         Assert.assertEquals(CreatedLogName, employeeLogName, "The created log name match the input.");
         Assert.assertEquals(CreatedLogComment, employeeLogComment, "The created log comment match the input.");
@@ -68,8 +69,7 @@ public class PerformanceTest extends BaseUITest {
         String updatedLogName = performancePage.getCreatedLogName();
         String updatedLogComment = performancePage.getCreatedLogComment();
 
-        Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), 
-                  "The success message does not indicate the candidate was successfully saved. Message: ");
+        Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), "The success message does not indicate the candidate was successfully saved. Message: ");
         Assert.assertEquals(updatedLogName, newEmployeeLogName, "The updated log name match the input.");
         Assert.assertEquals(updatedLogComment, newEmployeeLogComment, "The updated log comment match the input.");
     }
