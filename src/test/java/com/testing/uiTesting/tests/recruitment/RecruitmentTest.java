@@ -7,7 +7,6 @@ import com.testing.uiTesting.pages.recruitment.RecruitmentPage;
 
 public class RecruitmentTest extends BaseUITest {
     
-    
     @Test
     public void verifyNavigationToRecruitmentModule() {
         
@@ -46,8 +45,7 @@ public class RecruitmentTest extends BaseUITest {
         String CreatedCandidateFirstName = recruitmentPage.getCreatedCandidateFirstName();
         String CreatedCandidateEmail = recruitmentPage.getCreatedCandidateEmail();
 
-        Assert.assertTrue(Message.toLowerCase().contains("successfully saved"), 
-                  "The success message does not indicate the candidate was successfully saved. Message: ");
+        Assert.assertTrue(Message.toLowerCase().contains("successfully saved"), "The success message does not indicate the candidate was successfully saved. Message: ");
         Assert.assertEquals(CreatedCandidateFirstName, candidateFirstName, "The candidate first name does not match the input.");
         Assert.assertEquals(CreatedCandidateEmail, candidateEmail, "The candidate email does not match the input.");
     }
