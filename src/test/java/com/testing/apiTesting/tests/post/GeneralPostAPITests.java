@@ -1,16 +1,13 @@
 package com.testing.apiTesting.tests.post;
 
 import io.restassured.response.Response;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
 import com.testing.apiTesting.utils.BookDataFactory;
 import com.testing.apiTesting.utils.TestUtils;
-
 import java.util.Map;
 
 public class GeneralPostAPITests extends BaseAPITest {
@@ -92,22 +89,22 @@ public class GeneralPostAPITests extends BaseAPITest {
     }
 
     @Test(description = "Verify case sensitivity in duplicate book handling")
-public void testCaseSensitivityInDuplicateBookHandling() {
+    public void testCaseSensitivityInDuplicateBookHandling() {
 
-    String originalTitle = "Unique Title " + uniqueIdentifier;
-    String originalAuthor = "Original Author " + uniqueIdentifier;
+        String originalTitle = "Unique Title " + uniqueIdentifier;
+        String originalAuthor = "Original Author " + uniqueIdentifier;
 
-    Map<String, Object> originalBookData = BookDataFactory.createValidBook(originalTitle, originalAuthor);
-    Response createdBook = bookAPIClient.createBook(adminUser, originalBookData);
-    APIResponseValidator.validateSuccessfulCreation(createdBook);
+        Map<String, Object> originalBookData = BookDataFactory.createValidBook(originalTitle, originalAuthor);
+        Response createdBook = bookAPIClient.createBook(adminUser, originalBookData);
+        APIResponseValidator.validateSuccessfulCreation(createdBook);
 
-    String duplicateTitle = originalTitle.toUpperCase();
-    String duplicateAuthor = originalAuthor.toLowerCase();
+        String duplicateTitle = originalTitle.toUpperCase();
+        String duplicateAuthor = originalAuthor.toLowerCase();
 
-    Map<String, Object> duplicateBookData = BookDataFactory.createValidBook(duplicateTitle, duplicateAuthor);
-    Response duplicateResponse = bookAPIClient.createBook(adminUser, duplicateBookData);
+        Map<String, Object> duplicateBookData = BookDataFactory.createValidBook(duplicateTitle, duplicateAuthor);
+        Response duplicateResponse = bookAPIClient.createBook(adminUser, duplicateBookData);
 
-    APIResponseValidator.validateDuplicateCreation(duplicateResponse);
-}
+        APIResponseValidator.validateDuplicateCreation(duplicateResponse);
+    }
 
 }

@@ -23,7 +23,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         testUtils = new TestUtils();
     }
 
-    @Test(description = "Verify Retrieving all books as an admin user with valid response and headers")
+    @Test(description = "Verify Retrieving all books as an admin user")
     public void testGetAllBooksasAdminUser_ValidScenario() {
         // Create book before get
         Response createdResponse = testUtils.createTestBook(bookAPIClient,adminUser);
@@ -33,7 +33,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateSuccessfulRetrieval(response);
     }
 
-    @Test(description = "Verify Retrieving a book by ID as an admin user with valid response")
+    @Test(description = "Verify Retrieving a book by ID as an admin user")
     public void testGetBookByIdasAdminUser_ValidScenario() {
         // Create book before get
         Response createdResponse = testUtils.createTestBook(bookAPIClient,adminUser);
@@ -44,7 +44,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         APIResponseValidator.validateSuccessfulRetrievalofaSinglebook(response, validBookId);
     }
 
-    @Test(description = "Verify Retrieving a book by ID as a general user with valid response")
+    @Test(description = "Verify Retrieving a book by ID as a general user")
     public void testGetBookByIdasGeneralUser_ValidScenario() {
         // Create book before get
         Response createdResponse = testUtils.createTestBook(bookAPIClient, adminUser);
@@ -69,6 +69,7 @@ public class GeneralGetAPITests extends BaseAPITest {
         Response response = bookAPIClient.getBookById(adminUser, invalidBookId);
         APIResponseValidator.validateInvalidId(response); 
     }
+
     @Test(description ="Verify Retrieving all Books as a general user")
     public void testGetAllBooksasGeneralUser() {
         String user = "user";

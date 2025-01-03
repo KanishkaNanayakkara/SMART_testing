@@ -2,7 +2,6 @@ package com.testing.uiTesting.tests.performance;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import com.testing.uiTesting.base.BaseUITest;
 import com.testing.uiTesting.pages.performance.PerformancePage;
 import com.testing.uiTesting.pages.sidebarNavigation.SideBarNavigationPanelPage;
