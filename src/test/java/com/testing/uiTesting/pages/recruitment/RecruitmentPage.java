@@ -58,6 +58,12 @@ public class RecruitmentPage {
     @FindBy(xpath = "//span[@class='oxd-switch-input oxd-switch-input--active --label-left'][1]")
     private static WebElement switch_edit;
 
+    @FindBy(xpath = "//div[text()='-- Select --']")
+    private WebElement vacancy_dropdown;
+
+    @FindBy(xpath = "//div[contains(@class, 'oxd-select-option')][2]")
+    private WebElement first_option;
+
     public void typeFirstName(String name) {
         txt_name_first.sendKeys(name);
     }
@@ -135,5 +141,13 @@ public class RecruitmentPage {
     public void clickAdd() {
         btn_add.click();
     }
+
+    public void clickDropDown() {
+        vacancy_dropdown.click();
+    }
+    public void clickFirstOption() {
+        first_option.click();
+    }
+
 
 }
