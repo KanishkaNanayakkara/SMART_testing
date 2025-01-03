@@ -54,4 +54,12 @@ public class DashboardNavigationTest extends BaseUITest {
                 "Failed to navigate to the Leave Module");
     }
 
+    @Test
+    public void verifyNavigationToPerformanceModule() {
+        SideBarNavigationPanelPage sideBar = new SideBarNavigationPanelPage(driver);
+        sideBar.clickPerformance();
+        Assert.assertTrue(driver.getCurrentUrl().contains("performance"),
+                "Failed to navigate to the Leave Module");
+    }
+
 }
