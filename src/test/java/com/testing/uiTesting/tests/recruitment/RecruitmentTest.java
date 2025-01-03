@@ -39,6 +39,8 @@ public class RecruitmentTest extends BaseUITest {
         recruitmentPage.typeLastName(candidateLastName);
         recruitmentPage.typeEmail(candidateEmail);
         recruitmentPage.typeKeyword(candidateEmail);
+        recruitmentPage.clickDropDown();
+        recruitmentPage.clickFirstOption();
         recruitmentPage.clickSubmit();
 
         String Message = recruitmentPage.getSuccessMessage();
