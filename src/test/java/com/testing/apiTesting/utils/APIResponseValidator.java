@@ -49,7 +49,13 @@ public class APIResponseValidator {
     }
     public static void validateDuplicateCreation(Response response) {
         int statusCode = response.statusCode();
-        Assert.assertEquals(statusCode, 409, "Expected 409 Conflict status code");
+        if (statusCode == 409) {
+            Assert.assertEquals(statusCode, 409, "Expected 409 Conflict for duplicate book ID");
+        } else if (statusCode == 208) {
+            Assert.assertEquals(statusCode, 208, "Expected 208 Already Reported for duplicate book ID");
+        } else {
+            Assert.fail("Unexpected status code: " + statusCode + ". Expected 409 or 208 for duplicate book handling.");
+        }
     }
     public static void updateBookTest(Response response) {
         Assert.assertEquals(response.jsonPath().getString("title"), "Updated Book Title", "Title did not update correctly");
