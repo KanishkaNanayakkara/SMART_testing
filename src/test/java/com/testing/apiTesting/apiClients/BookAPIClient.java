@@ -2,7 +2,6 @@ package com.testing.apiTesting.apiClients;
 
 import io.restassured.response.Response;
 import java.util.Map;
-
 import com.testing.apiTesting.base.BaseAPITest;
 
 public class BookAPIClient {

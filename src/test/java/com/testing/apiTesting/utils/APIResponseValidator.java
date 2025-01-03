@@ -44,9 +44,11 @@ public class APIResponseValidator {
     public static void validateUnauthorizedAccess(Response response) {
         Assert.assertEquals(response.getStatusCode(), 403, "Unauthorized access should be forbidden");
     }
+
       public static void validateInvalidId(Response response) {
         Assert.assertEquals(response.getStatusCode(), 404, "Expected status code 404");
     }
+
     public static void validateDuplicateCreation(Response response) {
         int statusCode = response.statusCode();
         if (statusCode == 409) {
@@ -57,13 +59,16 @@ public class APIResponseValidator {
             Assert.fail("Unexpected status code: " + statusCode + ". Expected 409 or 208 for duplicate book handling.");
         }
     }
+
     public static void updateBookTest(Response response) {
         Assert.assertEquals(response.jsonPath().getString("title"), "Updated Book Title", "Title did not update correctly");
         Assert.assertEquals(response.jsonPath().getString("author"), "Updated Author", "Author did not update correctly");
     }
+
     public static void invalidBookUpdate(Response response) {
         Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for invalid book update");
     }
+    
     public static void notExistBookUpdate(Response response) {
         Assert.assertEquals(response.statusCode(), 400, "Expected 400 Bad Request for non-existent book update");
     }

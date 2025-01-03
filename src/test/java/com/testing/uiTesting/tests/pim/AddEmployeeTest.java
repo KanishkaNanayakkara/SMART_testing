@@ -27,7 +27,6 @@ public class AddEmployeeTest extends BaseUITest{
         addEmployeePage.clickSaveButton();
 
         String profileHeading = addEmployeePage.getProfileHeading();
-        // String confirmationMessage = addEmployeePage.getConfirmationMessage();
 
         if (profileHeading.contains("Personal Details")) {
             System.out.println("Employee added successfully!");
@@ -36,8 +35,6 @@ public class AddEmployeeTest extends BaseUITest{
         }
 
         Assert.assertEquals(profileHeading, "Personal Details", "Added employee profile is not vissible!");
-        // Assert.assertTrue(confirmationMessage.contains("Successfully Saved"),
-        // "Addition successful!");
     }
 
     @Test(priority = 2)

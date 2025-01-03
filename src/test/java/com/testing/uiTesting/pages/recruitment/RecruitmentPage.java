@@ -1,7 +1,6 @@
 package com.testing.uiTesting.pages.recruitment;
 
 import java.time.Duration;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,21 +66,27 @@ public class RecruitmentPage {
     public void typeFirstName(String name) {
         txt_name_first.sendKeys(name);
     }
+
     public void typeMiddleName(String name) {
         txt_name_middle.sendKeys(name);
     }
+
     public void typeLastName(String name) {
         txt_name_last.sendKeys(name);
     }
+
     public void typeEmail(String email) {
         txt_Email.sendKeys(email);
     }
+
     public void typeKeyword(String keyword) {
         txt_keyword.sendKeys(keyword);
     }
+
     public void typeContact(String contact){
         txt_contact.sendKeys(contact);
     }
+
     public void clearFirstName() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(txt_name_first));
@@ -89,6 +94,7 @@ public class RecruitmentPage {
         txt_name_first.sendKeys(Keys.CONTROL + "a");
         txt_name_first.sendKeys(Keys.BACK_SPACE);
     }
+
     public void clearLastName() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(txt_name_last));
@@ -96,6 +102,7 @@ public class RecruitmentPage {
         txt_name_last.sendKeys(Keys.CONTROL + "a");
         txt_name_last.sendKeys(Keys.BACK_SPACE);
     }
+
     public void clearContact(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(txt_contact));
@@ -103,41 +110,53 @@ public class RecruitmentPage {
         txt_contact.sendKeys(Keys.CONTROL + "a");
         txt_contact.sendKeys(Keys.BACK_SPACE);
     }
+
     public  String getSuccessMessage() {
         return successMessage.getText();
     }
+
     public  String getErrorMessage() {
         return errorMessage.getText();
     }
+
     public String getCreatedCandidateFirstName(){
         return txt_name_first.getDomProperty("value");
     }
+
     public String getCreatedCandidateLastName(){
         return txt_name_last.getDomProperty("value");
     }
+
     public String getCreatedCandidateEmail(){
         return txt_Email.getDomProperty("value");
     }
+
     public String getUpdatedCandidateMobileNumber(){
         return txt_contact.getDomProperty("value");
     }
+
     public void clickSave(){
         btn_submit.click();
     }
+
     public void clickSearch(){    
         btn_search.click();
     }
+
     public void clickEdit(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(btn_edit));
         btn_edit.click();
     }
+
     public void clickSwitchEdit(){
         switch_edit.click();
     }
+
     public void clickSubmit() {
         btn_submit.click();
     }
+
     public void clickAdd() {
         btn_add.click();
     }
@@ -145,9 +164,8 @@ public class RecruitmentPage {
     public void clickDropDown() {
         vacancy_dropdown.click();
     }
+
     public void clickFirstOption() {
         first_option.click();
     }
-
-
 }

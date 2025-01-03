@@ -3,7 +3,6 @@ package com.testing.apiTesting.tests.delete;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.restassured.response.Response;
-
 import com.testing.apiTesting.apiClients.BookAPIClient;
 import com.testing.apiTesting.base.BaseAPITest;
 import com.testing.apiTesting.utils.APIResponseValidator;
