@@ -79,13 +79,13 @@ public class GeneralPostAPITests extends BaseAPITest {
         Response createdBook = testUtils.createTestBook(bookAPIClient, adminUser);
 
         int bookId = createdBook.jsonPath().getInt("id");
-        String createdBookTitle = createdBook.jsonPath().getString("title");
-        String createdBookAuthor = createdBook.jsonPath().getString("author");
+        String newTitle = "Updated Title " + uniqueIdentifier;
+        String newBookAuthor = "Updated Author " + uniqueIdentifier;
 
         Response duplicateResponse = bookAPIClient.createBook(adminUser, Map.of(
             "id", bookId,
-            "title", createdBookTitle,
-            "author", createdBookAuthor
+            "title", newTitle,
+            "author", newBookAuthor
         ));
 
         APIResponseValidator.validateDuplicateCreation(duplicateResponse);
