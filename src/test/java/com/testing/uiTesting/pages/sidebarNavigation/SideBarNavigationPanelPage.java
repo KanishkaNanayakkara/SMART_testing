@@ -30,6 +30,9 @@ public class SideBarNavigationPanelPage {
     @FindBy(xpath = "//a[normalize-space()='Change Password']")
     private WebElement profileMenu;
 
+    @FindBy(xpath = "//a[normalize-space()='Performance']")
+    private WebElement performanceSheet;
+
     public SideBarNavigationPanelPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -56,6 +59,9 @@ public class SideBarNavigationPanelPage {
     }
     public void clickRecruitment() {
         recruitment.click();
+    }
+    public void clickPerformance() {
+        performanceSheet.click();
     }
 
 }

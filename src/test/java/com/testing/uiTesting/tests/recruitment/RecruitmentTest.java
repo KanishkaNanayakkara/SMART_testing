@@ -81,7 +81,7 @@ public class RecruitmentTest extends BaseUITest {
         String updatedCandidateFirstName = recruitmentPage.getCreatedCandidateFirstName();
         String updatedCandidateLastName = recruitmentPage.getCreatedCandidateLastName();
         String updatedCandidateMobileNumber = recruitmentPage.getUpdatedCandidateMobileNumber();
-
+        
         Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), "The success message does not indicate the candidate was successfully Updated.");
         Assert.assertEquals(updatedCandidateFirstName, newCandidateFirstName, "The candidate first name does not match the input.");
         Assert.assertEquals(updatedCandidateLastName, newCandidateLastName, "The candidate last name does not match the input.");
