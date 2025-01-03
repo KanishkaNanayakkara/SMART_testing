@@ -69,6 +69,12 @@ public class GeneralGetAPITests extends BaseAPITest {
         Response response = bookAPIClient.getBookById(adminUser, invalidBookId);
         APIResponseValidator.validateInvalidId(response); 
     }
+    @Test(description ="Verify Retrieving all Books as a general user")
+    public void testGetAllBooksasGeneralUser() {
+        String user = "user";
+        Response response = bookAPIClient.getAllBooks(user);
+        APIResponseValidator.validateGetAllBooksWithGeneralUser(response);
+    }
 }
 
 

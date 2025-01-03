@@ -1,9 +1,5 @@
 package com.testing.apiTesting.utils;
-
-import java.util.List;
-
 import org.testng.Assert;
-
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -53,11 +49,7 @@ public class APIResponseValidator {
     }
     public static void validateDuplicateCreation(Response response) {
         int statusCode = response.statusCode();
-        if (statusCode == 409) {
-            Assert.assertEquals(statusCode, 409, "Expected 409 Conflict for duplicate book ID");
-        } else if (statusCode == 208) {
-            Assert.assertEquals(statusCode, 208, "Expected 208 Already Reported for duplicate book ID");
-        }
+        Assert.assertEquals(statusCode, 409, "Expected 409 Conflict status code");
     }
     public static void updateBookTest(Response response) {
         Assert.assertEquals(response.jsonPath().getString("title"), "Updated Book Title", "Title did not update correctly");
@@ -76,5 +68,9 @@ public class APIResponseValidator {
 
     public static void unauthorizedUpdate(Response response){
         Assert.assertEquals(response.getStatusCode(), 403, "Expected 403 Unauthorized status code");
+    }
+
+    public static void validateGetAllBooksWithGeneralUser(Response response) {
+        Assert.assertEquals(response.getStatusCode(), 200, "Expected status code 200");
     }
 }
