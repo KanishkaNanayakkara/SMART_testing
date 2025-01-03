@@ -9,7 +9,7 @@ import com.testing.uiTesting.pages.sidebarNavigation.SideBarNavigationPanelPage;
 
 public class PerformanceTest extends BaseUITest {
 
-    @Test
+    @Test(priority = 1)
     public void verifyAddNewTrackerReview () {
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         PerformancePage performancePage = new PerformancePage(driver);
@@ -40,7 +40,7 @@ public class PerformanceTest extends BaseUITest {
         Assert.assertEquals(CreatedLogComment, employeeLogComment, "The created log comment match the input.");
     }
 
-    @Test
+    @Test(priority = 2)
     public void verifyUpdateTrackerReview () {
         SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
         PerformancePage performancePage = new PerformancePage(driver);
@@ -69,8 +69,28 @@ public class PerformanceTest extends BaseUITest {
         String updatedLogName = performancePage.getCreatedLogName();
         String updatedLogComment = performancePage.getCreatedLogComment();
 
+        performancePage.clickClose();
+
         Assert.assertTrue(Message.toLowerCase().contains("successfully updated"), "The success message does not indicate the candidate was successfully saved. Message: ");
         Assert.assertEquals(updatedLogName, newEmployeeLogName, "The updated log name match the input.");
         Assert.assertEquals(updatedLogComment, newEmployeeLogComment, "The updated log comment match the input.");
+    }
+
+    @Test(priority = 3)
+    public void verifyDeleteTrackerReview () {
+        SideBarNavigationPanelPage sideBarNavigationPanelPage = new SideBarNavigationPanelPage(driver);
+        PerformancePage performancePage = new PerformancePage(driver);
+
+        sideBarNavigationPanelPage.clickPerformance();
+        performancePage.clickMyTrackers();
+        performancePage.clickViewBtn();
+        performancePage.clickOptions();
+
+        performancePage.clickDelete();
+        performancePage.clickYesDelete();
+
+        String Message = performancePage.getSuccessMessage();
+
+        Assert.assertTrue(Message.toLowerCase().contains("successfully deleted"), "The success message does not indicate the candidate was successfully saved. Message: ");
     }
 }

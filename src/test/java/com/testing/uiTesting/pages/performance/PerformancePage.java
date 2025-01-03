@@ -42,6 +42,12 @@ public class PerformancePage {
     @FindBy(xpath = "//button[normalize-space()='Cancel']" )
     private WebElement close_btn;
 
+    @FindBy(xpath = "//p[normalize-space()='Delete']" )
+    private WebElement delete_btn;
+
+    @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin']" )
+    private WebElement yes_delete_btn;
+
     @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--text orangehrm-tracker-rating-button --deselected']" )
     private WebElement negative_feedback;
 
@@ -108,6 +114,14 @@ public class PerformancePage {
 
     public void clickEdit(){
         edit_btn.click();
+    }
+
+    public void clickDelete(){
+        delete_btn.click();
+    }
+
+    public void clickYesDelete(){
+        yes_delete_btn.click();
     }
 
     public void clickNegativeFeedback(){
